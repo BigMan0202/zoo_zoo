@@ -67,7 +67,11 @@
       for (const scene of this.scenes) {
         scene.enabled = false;
       }
-      this.progress = frame / 400;
+      const numBars = Math.max(0, ((BEAN / 48) | 0) - 8);
+      const nextBackBean = 8 * 48 + numBars * 48 + 24;
+      const throbTime = lerp(0, 1, (frame - FRAME_FOR_BEAN(nextBackBean - 4)) / (FRAME_FOR_BEAN(nextBackBean + 4) - FRAME_FOR_BEAN(nextBackBean - 4)));
+      const throb = 10 * (Math.sin(0.5 * Math.PI * throbTime) + numBars);
+      this.progress = (frame + throb) / 400;
       const currentScene = this.scenes[this.progress | 0];
       currentScene.enabled = true;
       const nextScene = this.scenes[(this.progress + 1) | 0];
