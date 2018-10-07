@@ -59,11 +59,22 @@
         this.inputs.r,
         this.inputs.s,
       ];
+
+      this.throb = 0;
     }
 
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
+    beforeUpdate(frame) {
+      for (const scene of this.scenes) {
+        scene.enabled = false;
+      }
+      this.progress = frame / 400;
+      const currentScene = this.scenes[this.progress | 0];
+      currentScene.enabled = true;
+      const nextScene = this.scenes[(this.progress + 1) | 0];
+      nextScene.enabled = true;
+
+      this.currentImage = currentScene.getValue();
+      this.nextImage = nextScene.getValue();
     }
 
     resize() {
@@ -77,27 +88,25 @@
       this.ctx.translate(1920 / 2, 1080 / 2);
 
       this.ctx.save();
-      const progress = this.frame / 400;
-      const t = progress % 1;
-      const currentImage = this.scenes[progress | 0].getValue();
-      const nextImage = this.scenes[(progress + 1) | 0].getValue();
-      const x = lerp(0, currentImage.x, t);
-      const y = lerp(0, currentImage.y, t);
-      const zoom = lerp(1, currentImage.zoom, Math.pow(2, 1 + t) / 2 - 1);
+      const t = this.progress % 1;
+      const x = lerp(0, this.currentImage.x, t);
+      const y = lerp(0, this.currentImage.y, t);
+      const zoom = lerp(1, this.currentImage.zoom, Math.pow(2, 1 + t) / 2 - 1);
 
-      const rotation = lerp(0, currentImage.rotation, t);
+      const rotation = lerp(0, this.currentImage.rotation, t);
 
       this.ctx.rotate(rotation);
       this.ctx.translate(-x * zoom, -y * zoom);
       this.ctx.scale(zoom, zoom);
 
-      this.ctx.drawImage(currentImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
+      this.ctx.drawImage(this.currentImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
 
-      this.ctx.scale(1 / currentImage.zoom, 1 / currentImage.zoom);
-      this.ctx.translate(currentImage.x * currentImage.zoom, currentImage.y * currentImage.zoom);
-      this.ctx.rotate(-currentImage.rotation);
+      this.ctx.scale(1 / this.currentImage.zoom, 1 / this.currentImage.zoom);
+      this.ctx.translate(this.currentImage.x * this.currentImage.zoom,
+                         this.currentImage.y * this.currentImage.zoom);
+      this.ctx.rotate(-this.currentImage.rotation);
 
-      this.ctx.drawImage(nextImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
+      this.ctx.drawImage(this.nextImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
 
       this.ctx.restore();
       this.ctx.restore();
