@@ -2,9 +2,33 @@
   class yo extends NIN.THREENode {
     constructor(id) {
       super(id, {
+        inputs: {
+          a: new NIN.Input(),
+          b: new NIN.Input(),
+          c: new NIN.Input(),
+          d: new NIN.Input(),
+          e: new NIN.Input(),
+          f: new NIN.Input(),
+          g: new NIN.Input(),
+          h: new NIN.Input(),
+          i: new NIN.Input(),
+          j: new NIN.Input(),
+          k: new NIN.Input(),
+          l: new NIN.Input(),
+          m: new NIN.Input(),
+          n: new NIN.Input(),
+          o: new NIN.Input(),
+          p: new NIN.Input(),
+          q: new NIN.Input(),
+          r: new NIN.Input(),
+          s: new NIN.Input(),
+          t: new NIN.Input(),
+          u: new NIN.Input(),
+          v: new NIN.Input(),
+        },
         outputs: {
           render: new NIN.TextureOutput()
-        }
+        },
       });
 
       this.canvas = document.createElement('canvas');
@@ -14,125 +38,27 @@
       this.output.minFilter = THREE.LinearFilter;
       this.output.magFilter = THREE.LinearFilter;
 
-      this.images = [{
-        path: 'res/city.jpg' ,
-        x: 720 + 1920 / 8 - 1920 / 2,
-        y: 405 + 1080 / 8 - 1080 / 2,
-        zoom: 4,
-        rotation: 0,
-      }, {
-        path: 'res/sun.jpg' ,
-        x: 480 - 1920 / 2,
-        y: 453 - 1080 / 2,
-        zoom: 4,
-        rotation: 0,
-      }, {
-        path: 'res/cube.jpg' ,
-        x: 1033 - 960,
-        y: 513 - 540,
-        zoom: 4,
-        rotation: 29.87 / 360 * Math. PI * 2,
-      }, {
-        path: 'res/graph.jpg' ,
-        x: 989 - 960,
-        y: 745 - 540,
-        zoom: 4,
-        rotation: 0,
-      }, {
-        path: 'res/face.jpg' ,
-        x: 960 - 960,
-        y: 644 - 540 + 20,
-        zoom: 100 / 15.52,
-        rotation: 0,
-      }, {
-        path: 'res/teeth.jpg' ,
-        x: 1169 - 960,
-        y: 406 - 540,
-        zoom: 4,
-        rotation: Math.PI * 2 + -185.93 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/cocktail.jpg' ,
-        x: 412 - 960,
-        y: 681 - 540,
-        zoom: 4,
-        rotation: -21.27 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/snake.jpg',
-        x: 0,
-        y: 0,
-        zoom: 4,
-        rotation: 0,
-      }, {
-        path: 'res/tvboy.jpg',
-        x: 0,
-        y: 0,
-        zoom: 4,
-        rotation: Math.PI,
-      }, {
-        path: 'res/seamonster.jpg',
-        x: 0,
-        y: 0,
-        zoom: 4,
-        rotation: -3.48 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/octo.jpg',
-        x: 330 - 960,
-        y: 680 - 540,
-        zoom: 4,
-        rotation: -130.97 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/dragonshrimp.jpg',
-        x: 1625 - 960,
-        y: 239 - 540,
-        zoom: 4,
-        rotation: -18.53 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/eyes.jpg',
-        x: 240 - 960,
-        y: 135 - 540,
-        zoom: 4,
-        rotation: 90 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/dudes.jpg',
-        x: 0,
-        y: 0,
-        zoom: 4,
-        rotation: -90 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/yinyang.jpg',
-        x: 616 - 960,
-        y: 559 - 540,
-        zoom: 4,
-        rotation: -56.12 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/roses.jpg',
-        x: 1548 - 960,
-        y: 769 - 540,
-        zoom: 4,
-        rotation: 19.65 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/organiball.jpg',
-        x: 1299 - 960,
-        y: 297 - 540,
-        zoom: 4,
-        rotation: -126.78 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/coolcat.jpg',
-        x: 635 - 960,
-        y: 471 - 540,
-        zoom: 4,
-        rotation: -43.66 / 360 * Math.PI * 2,
-      }, {
-        path: 'res/bact.jpg',
-        x: 0,
-        y: 0,
-        zoom: 4,
-        rotation: 0,
-      }];
-      for(let image of this.images) {
-        image.element = document.createElement('img');
-        Loader.load(image.path, image.element, () => null);
-      }
+      this.scenes = [
+        this.inputs.a,
+        this.inputs.b,
+        this.inputs.c,
+        this.inputs.d,
+        this.inputs.e,
+        this.inputs.f,
+        this.inputs.g,
+        this.inputs.h,
+        this.inputs.i,
+        this.inputs.j,
+        this.inputs.k,
+        this.inputs.l,
+        this.inputs.m,
+        this.inputs.n,
+        this.inputs.o,
+        this.inputs.p,
+        this.inputs.q,
+        this.inputs.r,
+        this.inputs.s,
+      ];
     }
 
     update(frame) {
@@ -146,7 +72,6 @@
     }
 
     render() {
-
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
       this.ctx.translate(1920 / 2, 1080 / 2);
@@ -154,8 +79,8 @@
       this.ctx.save();
       const progress = this.frame / 400;
       const t = progress % 1;
-      const currentImage = this.images[progress | 0];
-      const nextImage = this.images[(progress + 1) | 0];
+      const currentImage = this.scenes[progress | 0].getValue();
+      const nextImage = this.scenes[(progress + 1) | 0].getValue();
       const x = lerp(0, currentImage.x, t);
       const y = lerp(0, currentImage.y, t);
       const zoom = lerp(1, currentImage.zoom, Math.pow(2, 1 + t) / 2 - 1);
@@ -166,14 +91,13 @@
       this.ctx.translate(-x * zoom, -y * zoom);
       this.ctx.scale(zoom, zoom);
 
-
-      this.ctx.drawImage(currentImage.element, -1920 / 2, -1080 / 2);
+      this.ctx.drawImage(currentImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
 
       this.ctx.scale(1 / currentImage.zoom, 1 / currentImage.zoom);
       this.ctx.translate(currentImage.x * currentImage.zoom, currentImage.y * currentImage.zoom);
       this.ctx.rotate(-currentImage.rotation);
 
-      this.ctx.drawImage(nextImage.element, -1920 / 2, -1080 / 2);
+      this.ctx.drawImage(nextImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
 
       this.ctx.restore();
       this.ctx.restore();

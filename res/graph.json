@@ -19,6 +19,103 @@
   },
   {
     "id": "yo",
-    "type": "yo"
+    "type": "yo",
+    "connected": {
+      "a": "city.render",
+      "b": "sun.render",
+      "c": "cube.render",
+      "d": "schmraph.render",
+      "e": "face.render",
+      "f": "teeth.render",
+      "g": "cocktail.render",
+      "h": "snake.render",
+      "i": "tvboy.render",
+      "j": "seamonster.render",
+      "k": "octo.render",
+      "l": "dragonshrimp.render",
+      "m": "eyes.render",
+      "n": "dudes.render",
+      "o": "yinyang.render",
+      "p": "roses.render",
+      "q": "organiball.render",
+      "r": "coolcat.render",
+      "s": "bact.render"
+    }
+  },
+  {
+    "id": "city",
+    "type": "city"
+  },
+  {
+    "id": "sun",
+    "type": "sun"
+  },
+  {
+    "id": "cube",
+    "type": "cube"
+  },
+  {
+    "id": "schmraph",
+    "type": "schmraph"
+  },
+  {
+    "id": "face",
+    "type": "face"
+  },
+  {
+    "id": "teeth",
+    "type": "teeth"
+  },
+  {
+    "id": "cocktail",
+    "type": "cocktail"
+  },
+  {
+    "id": "snake",
+    "type": "snake"
+  },
+  {
+    "id": "tvboy",
+    "type": "tvboy"
+  },
+  {
+    "id": "seamonster",
+    "type": "seamonster"
+  },
+  {
+    "id": "octo",
+    "type": "octo"
+  },
+  {
+    "id": "dragonshrimp",
+    "type": "dragonshrimp"
+  },
+  {
+    "id": "eyes",
+    "type": "eyes"
+  },
+  {
+    "id": "dudes",
+    "type": "dudes"
+  },
+  {
+    "id": "yinyang",
+    "type": "yinyang"
+  },
+  {
+    "id": "roses",
+    "type": "roses"
+  },
+  {
+    "id": "organiball",
+    "type": "organiball"
+  },
+  {
+    "id": "coolcat",
+    "type": "coolcat"
+  },
+  {
+    "id": "bact",
+    "type": "bact"
   }
 ]
