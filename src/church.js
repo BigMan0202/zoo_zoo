@@ -1,5 +1,5 @@
 (function(global) {
-  class face extends NIN.Node {
+  class church extends NIN.Node {
     constructor(id) {
       super(id, {
         outputs: {
@@ -9,9 +9,9 @@
 
       this.output = {
         canvas: document.createElement('canvas'),
-        x: 960 - 960,
-        y: 644 - 540 + 20,
-        zoom: 100 / 15.52,
+        x: 1009 - 960,
+        y: 680 - 540,
+        zoom: 4,
         rotation: 0,
       };
       this.outputs.render.setValue(this.output);
@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/face.png', this.imageElement, () => null);
+      Loader.load('res/church.png', this.imageElement, () => null);
     }
 
     update(frame) {
@@ -36,13 +36,11 @@
     render() {
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.translate(1920 / 2, 1080 / 2);
-
-      this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
+      this.ctx.drawImage(this.imageElement, 0, 0);
 
       this.ctx.restore();
     }
   }
 
-  global.face = face;
+  global.church = church;
 })(this);

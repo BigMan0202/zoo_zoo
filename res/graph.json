@@ -21,10 +21,10 @@
     "id": "yo",
     "type": "yo",
     "connected": {
-      "a": "city.render",
-      "b": "sun.render",
-      "c": "cube.render",
-      "d": "schmraph.render",
+      "a": "skyline.render",
+      "b": "skyline.render",
+      "c": "church.render",
+      "d": "nuns.render",
       "e": "face.render",
       "f": "teeth.render",
       "g": "cocktail.render",
@@ -117,5 +117,17 @@
   {
     "id": "bact",
     "type": "bact"
+  },
+  {
+    "id": "skyline",
+    "type": "skyline"
+  },
+  {
+    "id": "church",
+    "type": "church"
+  },
+  {
+    "id": "nuns",
+    "type": "nuns"
   }
 ]
