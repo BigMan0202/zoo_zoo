@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/octo.jpg', this.imageElement, () => null);
+      Loader.load('res/octo.png', this.imageElement, () => null);
 
       this.eyePositions = [
         {

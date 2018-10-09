@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/tvboy.jpg', this.imageElement, () => null);
+      Loader.load('res/tvboy.png', this.imageElement, () => null);
     }
 
     update(frame) {

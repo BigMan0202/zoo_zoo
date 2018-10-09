@@ -1,5 +1,5 @@
 (function(global) {
-  class snake extends NIN.Node {
+  class innerglass extends NIN.Node {
     constructor(id) {
       super(id, {
         outputs: {
@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/snake.jpg', this.imageElement, () => null);
+      Loader.load('res/innerglass.png', this.imageElement, () => null);
     }
 
     update(frame) {
@@ -44,5 +44,5 @@
     }
   }
 
-  global.snake = snake;
+  global.innerglass = innerglass;
 })(this);
