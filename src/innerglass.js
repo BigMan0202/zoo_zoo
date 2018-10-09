@@ -12,7 +12,7 @@
         x: 0,
         y: 0,
         zoom: 4,
-        rotation: 0,
+        rotation: Math.PI / 2,
       };
       this.outputs.render.setValue(this.output);
 

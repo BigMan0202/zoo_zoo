@@ -9,8 +9,8 @@
 
       this.output = {
         canvas: document.createElement('canvas'),
-        x: 240 - 960,
-        y: 135 - 540,
+        x: 135 - 960,
+        y: 240 - 540,
         zoom: 4,
         rotation: 90 / 360 * Math.PI * 2,
       };

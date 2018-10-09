@@ -10,7 +10,7 @@
       this.output = {
         canvas: document.createElement('canvas'),
         x: 616 - 960,
-        y: 559 - 540,
+        y: 599 - 540,
         zoom: 4,
         rotation: -56.12 / 360 * Math.PI * 2,
       };
