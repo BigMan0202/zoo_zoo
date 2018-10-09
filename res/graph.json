@@ -28,7 +28,13 @@
       "e": "face.render",
       "f": "teeth.render",
       "g": "cocktail.render",
-      "h": "snake.render",
+      "h": "snakecharmer.render",
+      "h1": "glassring.render",
+      "h2": "innerglass.render",
+      "h3": "soda.render",
+      "h4": "holes.render",
+      "h5": "radio.render",
+      "h6": "tvforest.render",
       "i": "tvboy.render",
       "j": "seamonster.render",
       "k": "octo.render",
@@ -71,8 +77,32 @@
     "type": "cocktail"
   },
   {
-    "id": "snake",
-    "type": "snake"
+      "id": "snakecharmer",
+      "type": "snakecharmer"
+  },
+  {
+      "id": "glassring",
+      "type": "glassring"
+  },
+  {
+      "id": "innerglass",
+      "type": "innerglass"
+  },
+  {
+      "id": "soda",
+      "type": "soda"
+  },
+  {
+      "id": "holes",
+      "type": "holes"
+  },
+  {
+      "id": "radio",
+      "type": "radio"
+  },
+  {
+      "id": "tvforest",
+      "type": "tvforest"
   },
   {
     "id": "tvboy",

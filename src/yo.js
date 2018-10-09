@@ -11,6 +11,12 @@
           f: new NIN.Input(),
           g: new NIN.Input(),
           h: new NIN.Input(),
+          h1: new NIN.Input(),
+          h2: new NIN.Input(),
+          h3: new NIN.Input(),
+          h4: new NIN.Input(),
+          h5: new NIN.Input(),
+          h6: new NIN.Input(),
           i: new NIN.Input(),
           j: new NIN.Input(),
           k: new NIN.Input(),
@@ -47,6 +53,12 @@
         this.inputs.f,
         this.inputs.g,
         this.inputs.h,
+        this.inputs.h1,
+        this.inputs.h2,
+        this.inputs.h3,
+        this.inputs.h4,
+        this.inputs.h5,
+        this.inputs.h6,
         this.inputs.i,
         this.inputs.j,
         this.inputs.k,
@@ -71,7 +83,7 @@
       const nextBackBean = 8 * 48 + numBars * 48 + 24;
       const throbTime = lerp(0, 1, (frame - FRAME_FOR_BEAN(nextBackBean - 4)) / (FRAME_FOR_BEAN(nextBackBean + 4) - FRAME_FOR_BEAN(nextBackBean - 4)));
       const throb = 10 * (Math.sin(0.5 * Math.PI * throbTime) + numBars);
-      this.progress = (frame + throb) / 400;
+      this.progress = (frame + throb) / 300;
       const currentScene = this.scenes[this.progress | 0];
       currentScene.enabled = true;
       const nextScene = this.scenes[(this.progress + 1) | 0];

@@ -1,5 +1,5 @@
 (function(global) {
-  class cocktail extends NIN.Node {
+  class glassring extends NIN.Node {
     constructor(id) {
       super(id, {
         outputs: {
@@ -9,10 +9,10 @@
 
       this.output = {
         canvas: document.createElement('canvas'),
-        x: 412 - 960,
-        y: 681 - 540,
+        x: 0,
+        y: 0,
         zoom: 4,
-        rotation: -21.27 / 360 * Math.PI * 2,
+        rotation: 0,
       };
       this.outputs.render.setValue(this.output);
 
@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/cocktail.png', this.imageElement, () => null);
+      Loader.load('res/glassring.png', this.imageElement, () => null);
     }
 
     update(frame) {
@@ -44,5 +44,5 @@
     }
   }
 
-  global.cocktail = cocktail;
+  global.glassring = glassring;
 })(this);
