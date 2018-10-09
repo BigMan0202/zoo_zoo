@@ -10,7 +10,7 @@
     "id": "sceneSwitcherNode",
     "type": "SceneSwitcherNode",
     "connected": {
-      "A": "yo.render"
+      "A": "bgpattern.render"
     }
   },
   {
@@ -77,32 +77,32 @@
     "type": "cocktail"
   },
   {
-      "id": "snakecharmer",
-      "type": "snakecharmer"
+    "id": "snakecharmer",
+    "type": "snakecharmer"
   },
   {
-      "id": "glassring",
-      "type": "glassring"
+    "id": "glassring",
+    "type": "glassring"
   },
   {
-      "id": "innerglass",
-      "type": "innerglass"
+    "id": "innerglass",
+    "type": "innerglass"
   },
   {
-      "id": "soda",
-      "type": "soda"
+    "id": "soda",
+    "type": "soda"
   },
   {
-      "id": "holes",
-      "type": "holes"
+    "id": "holes",
+    "type": "holes"
   },
   {
-      "id": "radio",
-      "type": "radio"
+    "id": "radio",
+    "type": "radio"
   },
   {
-      "id": "tvforest",
-      "type": "tvforest"
+    "id": "tvforest",
+    "type": "tvforest"
   },
   {
     "id": "tvboy",
@@ -159,5 +159,16 @@
   {
     "id": "nuns",
     "type": "nuns"
+  },
+  {
+    "id": "bgpattern",
+    "type": "bgpatternNode",
+    "options": {
+      "shader": "bgpattern"
+    },
+    "connected": {
+      "texture": "yo.render",
+      "zoom": "yo.zoom"
+    }
   }
 ]

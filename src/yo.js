@@ -33,7 +33,8 @@
           v: new NIN.Input(),
         },
         outputs: {
-          render: new NIN.TextureOutput()
+          render: new NIN.TextureOutput(),
+          zoom: new NIN.Output(),
         },
       });
 
@@ -129,6 +130,7 @@
 
       this.output.needsUpdate = true;
       this.outputs.render.setValue(this.output);
+      this.outputs.zoom.setValue(zoom);
     }
   }
 
