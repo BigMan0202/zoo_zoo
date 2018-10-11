@@ -168,7 +168,9 @@
     },
     "connected": {
       "texture": "yo.render",
-      "zoom": "yo.zoom"
+      "zoom": "yo.zoom",
+      "x": "yo.x",
+      "y": "yo.y"
     }
   }
 ]
