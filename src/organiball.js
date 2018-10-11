@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/organiball.jpg', this.imageElement, () => null);
+      Loader.load('res/organiball.png', this.imageElement, () => null);
     }
 
     update(frame) {

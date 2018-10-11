@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/dudes.jpg', this.imageElement, () => null);
+      Loader.load('res/dudes.png', this.imageElement, () => null);
     }
 
     update(frame) {

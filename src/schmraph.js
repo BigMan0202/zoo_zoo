@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/schmraph.jpg', this.imageElement, () => null);
+      Loader.load('res/schmraph.png', this.imageElement, () => null);
     }
 
     update(frame) {

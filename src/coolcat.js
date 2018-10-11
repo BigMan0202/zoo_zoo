@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/coolcat.jpg', this.imageElement, () => null);
+      Loader.load('res/coolcat.png', this.imageElement, () => null);
     }
 
     update(frame) {

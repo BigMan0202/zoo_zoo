@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/cube.jpg', this.imageElement, () => null);
+      Loader.load('res/cube.png', this.imageElement, () => null);
     }
 
     update(frame) {
