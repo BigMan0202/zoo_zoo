@@ -1,6 +1,7 @@
 uniform float frame;
 uniform float zoom;
 uniform sampler2D tDiffuse;
+uniform sampler2D liquid;
 uniform float x;
 uniform float y;
 uniform float throb;
@@ -9,6 +10,7 @@ varying vec2 vUv;
 
 void main() {
     vec4 color = texture2D(tDiffuse, vUv);
+    vec4 liquidColor = texture2D(liquid, vUv);
     if (frame > 1700. && frame < 2500.) {
         if (color.r < .15 && color.g < .15 && color.b < .15) {
             float pos = mix(vUv.x, vUv.y, sin(frame / 60.)) * 10.;
@@ -16,6 +18,13 @@ void main() {
             gl_FragColor = mix(vec4(0., 0., 0., 1.), vec4(184./255., 13./255., 19./255., 1.), value);
         }
     }
+
+    vec3 red = vec3(184., 13., 19.) / 255.;
+    vec3 pink = 0.5 + vec3(184., 13., 19.) / 255.;
+
+    vec3 liq = mix(pink, red, step(0.9, liquidColor.r));
+
+    color = mix(color, vec4(liq, 1.), step(0.75, liquidColor.r));
 
     float sizer = 4.;
 

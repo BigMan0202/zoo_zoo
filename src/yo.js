@@ -37,6 +37,7 @@
           zoom: new NIN.Output(),
           x: new NIN.Output(),
           y: new NIN.Output(),
+          rotation: new NIN.Output(),
         },
       });
 
@@ -133,6 +134,7 @@
       this.output.needsUpdate = true;
       this.outputs.render.setValue(this.output);
       this.outputs.zoom.setValue(zoom);
+      this.outputs.rotation.setValue(rotation);
       this.outputs.x.setValue(x);
       this.outputs.y.setValue(y);
     }

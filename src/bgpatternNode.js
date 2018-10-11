@@ -3,6 +3,7 @@
     constructor(id, options) {
       options.inputs = {
         texture: new NIN.TextureInput(),
+        liquid: new NIN.TextureInput(),
         zoom: new NIN.Input(),
         x: new NIN.Input(),
         y: new NIN.Input(),
@@ -18,6 +19,7 @@
       }
       this.uniforms.frame.value = frame;
       this.uniforms.tDiffuse.value = this.inputs.texture.getValue();
+      this.uniforms.liquid.value = this.inputs.liquid.getValue();
       this.uniforms.zoom.value = this.inputs.zoom.getValue();
       this.uniforms.x.value = this.inputs.x.getValue();
       this.uniforms.y.value = this.inputs.y.getValue();
