@@ -1,5 +1,6 @@
 {
     "tDiffuse": { "type": "t", "value": null },
+    "liquid": { "type": "t", "value": null },
     "frame": { "type": "f", "value": 0.0 },
     "zoom": { "type": "f", "value": 0.0 },
     "x": { "type": "f", "value": 0.0 },

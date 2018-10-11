@@ -168,9 +168,20 @@
     },
     "connected": {
       "texture": "yo.render",
+      "liquid": "liquid.render",
       "zoom": "yo.zoom",
       "x": "yo.x",
       "y": "yo.y"
+    }
+  },
+  {
+    "id": "liquid",
+    "type": "liquid",
+    "connected": {
+        "rotation": "yo.rotation",
+        "zoom": "yo.rotation",
+        "x": "yo.x",
+        "y": "yo.y"
     }
   }
 ]
