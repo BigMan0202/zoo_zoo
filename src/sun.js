@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/sun.jpg', this.imageElement, () => null);
+      Loader.load('res/sun.png', this.imageElement, () => null);
     }
 
     update(frame) {

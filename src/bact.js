@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      //Loader.load('res/bact.jpg', this.imageElement, () => null);
+      Loader.load('res/bact.png', this.imageElement, () => null);
     }
 
     update(frame) {

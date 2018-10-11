@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/teeth.jpg', this.imageElement, () => null);
+      Loader.load('res/teeth.png', this.imageElement, () => null);
     }
 
     update(frame) {

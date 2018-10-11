@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/dragonshrimp.jpg', this.imageElement, () => null);
+      Loader.load('res/dragonshrimp.png', this.imageElement, () => null);
 
       this.eyePositions = [
         {

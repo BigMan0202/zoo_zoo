@@ -20,7 +20,7 @@
       this.resize();
 
       this.imageElement = document.createElement('img');
-      Loader.load('res/seamonster.jpg', this.imageElement, () => null);
+      Loader.load('res/seamonster.png', this.imageElement, () => null);
     }
 
     update(frame) {
