@@ -21,7 +21,7 @@
     "id": "yo",
     "type": "yo",
     "connected": {
-      "a": "skyline.render",
+      "a": "title.render",
       "b": "skyline.render",
       "c": "church.render",
       "d": "nuns.render",
@@ -159,6 +159,10 @@
   {
     "id": "nuns",
     "type": "nuns"
+  },
+  {
+    "id": "title",
+    "type": "title"
   },
   {
     "id": "bgpattern",

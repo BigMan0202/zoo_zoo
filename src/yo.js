@@ -41,6 +41,9 @@
         },
       });
 
+      this.title = document.createElement('img');
+      Loader.load('res/title.png', this.title, () => null);
+
       this.canvas = document.createElement('canvas');
       this.ctx = this.canvas.getContext('2d');
       this.resize();
@@ -129,6 +132,11 @@
       this.ctx.drawImage(this.nextImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
 
       this.ctx.restore();
+
+      if(BEAN < 384) {
+        this.ctx.drawImage(this.title, -1920 / 2, -1080 / 2);
+      }
+
       this.ctx.restore();
 
       this.output.needsUpdate = true;
