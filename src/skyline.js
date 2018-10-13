@@ -5,10 +5,6 @@
     }
 
     render() {
-      return super.render();
-    }
-
-    stuff() {
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.globalAlpha = 0.2;

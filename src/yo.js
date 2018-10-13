@@ -1,4 +1,25 @@
 (function(global) {
+
+
+  function rotatePoint(point, angle, pivot) {
+    s = Math.sin(angle);
+    c = Math.cos(angle);
+
+    // translate point back to origin:
+    point.x -= pivot.x;
+    point.y -= pivot.y;
+
+    // rotate point
+    const xnew = point.x * c - point.y * s;
+    const ynew = point.x * s + point.y * c;
+
+    // translate point back:
+    point.x = xnew + pivot.x;
+    point.y = ynew + pivot.y;
+    return point;
+  }
+
+
   class yo extends NIN.THREENode {
     constructor(id) {
       super(id, {
@@ -70,18 +91,17 @@
           rotation: 0,
           texture: this.inputs.e,
         }, {
-          x: 960,
-          y: 664,
-          rotation: 0,
+          x: 1169,
+          y: 406,
+          rotation: Math.PI * 0 + -185.93 / 360 * Math.PI * 2,
           texture: this.inputs.f,
-        }, {
-          x: 563.14,
-          y: 607.61,
-          rotation: 0,
+        }, { x: 563.14 - 5,
+          y: 607.61 - 83,
+          rotation: 26.85 / 360 * Math.PI * 2 + 0.00,
           texture: this.inputs.g,
         }, {
-          x: 709,
-          y: 391,
+          x: 709 - 35,
+          y: 391 + 205,
           rotation: -24.14 / 360 * Math.PI * 2,
           texture: this.inputs.h,
         }, {
@@ -95,23 +115,23 @@
           rotation: Math.PI / 2,
           texture: this.inputs.h2,
         }, {
-          x: 1235,
-          y: 437,
+          x: 1235 - 560,
+          y: 437 + 173,
           rotation: 27.16 / 360 * Math.PI * 2,
           texture: this.inputs.h3,
         }, {
-          x: 740.64,
-          y: 649,
+          x: 740.64 + 285,
+          y: 649 - 345,
           rotation: -66.55 / 360 * Math.PI * 2,
           texture: this.inputs.h4,
         }, {
-          x: 644,
-          y: 496,
+          x: 644 + 300,
+          y: 496 + 360,
           rotation: 42.79 / 360 * Math.PI * 2,
           texture: this.inputs.h5,
         }, {
-          x: 1208,
-          y: 414,
+          x: 1208 - 496,
+          y: 414 + 253,
           rotation: -27.45 / 360 * Math.PI * 2,
           texture: this.inputs.h6,
         }, {
@@ -174,25 +194,34 @@
 
 
       const curvePoints = [];
+      const rotationPoints = [];
       let accumulatedX = 0;
       let accumulatedY = 0;
+      let accumulatedRotation = 0;
+      let accumulatedPreviousRotation = 0;
       for(let i = 0; i < this.scenes.length; i++) {
         const geometry = new THREE.PlaneBufferGeometry(1920, 1080);
         const scene = this.scenes[i];
+        const previousScene = this.scenes[Math.max(i - 1, 0)];
         const x = (scene.x - 960) || 0;
         const y = (scene.y - 540) || 0;
-        accumulatedX -= x;
-        accumulatedY -= y;
+        accumulatedRotation += scene.rotation;
+        accumulatedPreviousRotation += previousScene.rotation;
+        const temp = rotatePoint({x: accumulatedX - x, y: accumulatedY - y}, accumulatedPreviousRotation, {x: accumulatedX, y: accumulatedY});
+        accumulatedX = temp.x;
+        accumulatedY = temp.y;
         const point = new THREE.Vector3(accumulatedX, accumulatedY, -i * 500);
         curvePoints[i] = point;
-
+        rotationPoints[i] = new THREE.Vector3(accumulatedRotation, accumulatedRotation, accumulatedRotation);
 
         const mesh = new THREE.Mesh(
           geometry,
           new THREE.MeshBasicMaterial({map: scene.texture.getValue()}));
-        mesh.position.x = x;
-        mesh.position.y = y;
+        const rotated = rotatePoint({x: x, y: y}, accumulatedPreviousRotation, {x: 0, y: 0});
+        mesh.position.x = rotated.x;
+        mesh.position.y = rotated.y;
         mesh.rotation.y = Math.PI;
+        mesh.rotation.z = accumulatedPreviousRotation;
         const container = new THREE.Object3D();
         container.position.x = point.x;
         container.position.y = point.y;
@@ -202,6 +231,7 @@
         scene.container = container;
         this.scene.add(container);
 
+        /*
         const debugHotspot = new THREE.Mesh(
           new THREE.BoxGeometry(20, 20, 20),
           new THREE.MeshBasicMaterial({color: 0xff00ff}));
@@ -210,17 +240,20 @@
         const debugCenter = new THREE.Mesh(
           new THREE.BoxGeometry(20, 20, 20),
           new THREE.MeshBasicMaterial({color: 0x0000ff}));
-        debugCenter.position.x = x;
-        debugCenter.position.y = y;
+        debugCenter.position.x = mesh.position.x;
+        debugCenter.position.y = mesh.position.y;
         container.add(debugCenter);
+        */
       }
 
+      const cameraZoom = 1;
       this.camera = new THREE.OrthographicCamera(
-        -1920 / 2, 1920 / 2,
-        1080 / 2, -1080 / 2,
+        -1920 / 2 * cameraZoom, 1920 / 2 * cameraZoom,
+        1080 / 2 * cameraZoom, -1080 / 2 * cameraZoom,
         0.001, 1000000);
 
       this.cameraPath = new THREE.CatmullRomCurve3(curvePoints);
+      this.rotationPath = new THREE.SplineCurve(rotationPoints);
 
       this.throb = 0;
 
@@ -228,28 +261,34 @@
 
     beforeUpdate(frame) {
       for (const scene of this.scenes) {
-        scene.texture.enabled = true;
+        scene.texture.enabled = false;
+        scene.container.visible = false;
       }
 
-      this.progress = Math.min(0, frame / 300);
+      this.progress = frame / 60 / 60 * PROJECT.music.bpm / 4 / 4;
       const currentScene = this.scenes[this.progress | 0];
       currentScene.texture.enabled = true;
+      currentScene.container.visible = true;
       const nextScene = this.scenes[(this.progress + 1) | 0];
       nextScene.texture.enabled = true;
+      nextScene.container.visible = true;
 
+      const previousScene = this.scenes[Math.max(0, (this.progress | 0) - 1)];
+      previousScene.container.visible = true;
     }
 
     update(frame) {
-      this.progress = frame / 60 / 60 * PROJECT.music.bpm / 4 / 4;
       this.currentScene = this.scenes[(this.progress) | 0];
       this.nextScene = this.scenes[(this.progress + 1) | 0];
       const t = Math.max((this.progress - 1) / (this.scenes.length - 1), 0);
       const point = this.cameraPath.getPoint(t);
+      const rotation = this.rotationPath.getPoint(t).x;
 
       this.camera.position.x = point.x;
       this.camera.position.y = point.y;
       this.camera.position.z = point.z - 999.9;
-      this.camera.lookAt(new THREE.Vector3(point.x, point.y, point.z + 1));
+      this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
+      this.camera.rotation.z = Math.PI + rotation;
 
       const currentScale = Math.exp(Math.log(4) * (this.progress % 1));
       this.currentScene.container.scale.set(currentScale, currentScale, 1);
