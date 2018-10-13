@@ -16,7 +16,7 @@
       const grey = '#909090';
       this.ctx.fillStyle = grey;
 
-      const open = easeIn(0, 1, (this.frame - 3860) / 25);
+      const open = easeIn(0, 1, (this.frame - 5120) / 25);
       const bottomOpen = lerp(45, 0, open * 2);
       const topOpen = lerp(1, 0, open * 2 - 1);
 
