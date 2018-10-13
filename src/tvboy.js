@@ -36,9 +36,44 @@
     render() {
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.translate(1920 / 2, 1080 / 2);
+      this.ctx.drawImage(this.imageElement, 0, 0);
 
-      this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
+      const doubleColonialWhite = '#eedda5';
+      this.ctx.fillStyle = doubleColonialWhite;
+
+      this.ctx.beginPath();
+      this.ctx.ellipse(862,
+                       338,
+                       45,
+                       35,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      this.ctx.beginPath();
+      this.ctx.ellipse(1089,
+                       332,
+                       45,
+                       35,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      const open = easeIn(0, 35, (this.frame - 3860) / 25);
+
+      this.ctx.drawImage(
+        this.imageElement,
+        862 - 45/2, 338 - 35/2,
+        45, 35,
+        862 - 45/2, 338 - open/2,
+        45, open
+      );
+
+      this.ctx.drawImage(
+        this.imageElement,
+        1089 - 45/2, 332 - 35/2,
+        45, 35,
+        1089 - 45/2, 332 - open/2,
+        45, open
+      );
 
       this.ctx.restore();
     }

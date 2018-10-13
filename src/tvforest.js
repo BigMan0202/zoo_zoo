@@ -36,9 +36,26 @@
     render() {
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.translate(1920 / 2, 1080 / 2);
+      this.ctx.drawImage(this.imageElement, 0, 0);
 
-      this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
+      const doubleColonialWhite = '#eedda5';
+      this.ctx.fillStyle = doubleColonialWhite;
+
+      this.ctx.beginPath();
+      this.ctx.ellipse(1211,
+                       356,
+                       7,
+                       7,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      this.ctx.beginPath();
+      this.ctx.ellipse(1262,
+                       381,
+                       6,
+                       6,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
 
       this.ctx.restore();
     }
