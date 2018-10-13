@@ -57,6 +57,30 @@
                        0, 0, Math.PI * 2);
       this.ctx.fill();
 
+
+      // 1496 x 195
+
+      if (BEAN >= 1739) {
+        // start eye blink 
+        const closeEye = this.frame <= 3359 ? easeOut(0, 1, (this.frame - 3344) / 10) : easeIn(1, 0, (this.frame - 3359)/ 10)
+        this.ctx.beginPath();
+        this.ctx.ellipse(1496 + (90 * closeEye),
+                          160,
+                          20 + (100 * closeEye),
+                          35 + (17 * closeEye),
+                          0,
+                          Math.PI / 2,(3* Math.PI )/ 2)
+        this.ctx.fill();
+        this.ctx.beginPath();
+        this.ctx.ellipse( 1658 - (90 * closeEye),
+                          164,
+                          20 + (100 * closeEye),
+                          35 + (19 * closeEye),
+                          0,
+                          -Math.PI/2,
+                          Math.PI/2)
+        this.ctx.fill();
+      }
       this.ctx.restore();
     }
   }
