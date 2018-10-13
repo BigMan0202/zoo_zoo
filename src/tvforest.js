@@ -38,22 +38,22 @@
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
       this.ctx.drawImage(this.imageElement, 0, 0);
 
-      const doubleColonialWhite = '#eedda5';
-      this.ctx.fillStyle = doubleColonialWhite;
+      const grey = '#909090';
+      this.ctx.fillStyle = grey;
 
       this.ctx.beginPath();
       this.ctx.ellipse(1211,
                        356,
-                       7,
-                       7,
+                       13,
+                       13,
                        0, 0, Math.PI * 2);
       this.ctx.fill();
 
       this.ctx.beginPath();
       this.ctx.ellipse(1262,
                        381,
-                       6,
-                       6,
+                       13,
+                       13,
                        0, 0, Math.PI * 2);
       this.ctx.fill();
 
