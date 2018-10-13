@@ -165,14 +165,14 @@
     }
 
     update(frame) {
-      super.update(frame);
-      this.frame = frame;
+      // super.update(frame);
+      // this.frame = frame;
 
-      for(let i = 0; i < ITERATIONS / 4; i++) {
-        this.computeDensityPressure();
-        this.computeForces();
-        this.integrate();
-      }
+      // for(let i = 0; i < ITERATIONS / 4; i++) {
+      //   this.computeDensityPressure();
+      //   this.computeForces();
+      //   this.integrate();
+      // }
     }
 
     render() {
