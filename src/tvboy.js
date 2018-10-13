@@ -75,23 +75,6 @@
                        0, 0, Math.PI);
       this.ctx.fill();
 
-      /*
-      this.ctx.drawImage(
-        this.imageElement,
-        862 - 45/2, 338 - 35/2,
-        45, 35,
-        862 - 45/2, 338 - open/2,
-        45, open
-      );
-
-      this.ctx.drawImage(
-        this.imageElement,
-        1089 - 45/2, 332 - 35/2,
-        45, 35,
-        1089 - 45/2, 332 - open/2,
-        45, open
-      );
-      */
 
       this.ctx.restore();
     }
