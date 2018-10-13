@@ -15,7 +15,7 @@ void main() {
         if (color.r < .15 && color.g < .15 && color.b < .15) {
             float pos = mix(vUv.x, vUv.y, sin(frame / 60.)) * 10.;
             float value = floor(fract(pos) + 0.5);
-            gl_FragColor = mix(vec4(0., 0., 0., 1.), vec4(184./255., 13./255., 19./255., 1.), value);
+            color = mix(vec4(0., 0., 0., 1.), vec4(184./255., 13./255., 19./255., 1.), value);
         }
     }
 

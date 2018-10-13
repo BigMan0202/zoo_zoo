@@ -1,26 +1,11 @@
 (function(global) {
-  class radio extends NIN.Node {
+  class radio extends ImageNode {
     constructor(id) {
       super(id, {
         outputs: {
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 644 - 960,
-        y: 496 - 540,
-        zoom: 4,
-        rotation: 42.79 / 360 * Math.PI * 2,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/radio.png', this.imageElement, () => null);
 
       this.jigglers = [
         {
@@ -82,21 +67,11 @@
       ];
     }
 
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
-    }
-
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
-    }
 
     render() {
+      super.render();
       this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU / 1920);
-
-      this.ctx.drawImage(this.imageElement, 0, 0);
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width / 1920);
 
       for (const jiggler of this.jigglers) {
         this.ctx.save();
@@ -112,6 +87,10 @@
       }
 
       this.ctx.restore();
+    }
+
+    getImageName() {
+      return 'res/radio.png';
     }
   }
 

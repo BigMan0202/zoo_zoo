@@ -1,26 +1,15 @@
 (function(global) {
-  class dragonshrimp extends NIN.Node {
+  class dragonshrimp extends ImageNode {
+    getImageName() {
+      return 'res/dragonshrimp.png';
+    }
+
     constructor(id) {
       super(id, {
         outputs: {
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 957 - 960,
-        y: 190 - 540,
-        zoom: 4,
-        rotation: 0,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/dragonshrimp.png', this.imageElement, () => null);
 
       this.eyePositions = [
         {
@@ -61,19 +50,10 @@
       ];
     }
 
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
-    }
-
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
-    }
-
     render() {
+      super.render();
       this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.drawImage(this.imageElement, 0, 0);
 
       const doubleColonialWhite = '#eedda5';

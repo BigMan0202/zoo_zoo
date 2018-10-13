@@ -85,6 +85,8 @@
       this.resize();
       this.outputs.render.setValue(this.output);
       this.output = new THREE.CanvasTexture(this.canvas);
+      this.output.minFilter = THREE.LinearFilter;
+      this.output.magFilter = THREE.LinearFilter;
       this.outputs.render.setValue(this.texture);
     }
 
@@ -165,17 +167,20 @@
     }
 
     update(frame) {
-      // super.update(frame);
-      // this.frame = frame;
+      /*
+      super.update(frame);
+      this.frame = frame;
 
-      // for(let i = 0; i < ITERATIONS / 4; i++) {
-      //   this.computeDensityPressure();
-      //   this.computeForces();
-      //   this.integrate();
-      // }
+      for(let i = 0; i < ITERATIONS / 4; i++) {
+        this.computeDensityPressure();
+        this.computeForces();
+        this.integrate();
+      }
+      */
     }
 
     render() {
+      return;
       this.ctx.globalAlpha = 0.1;
       this.ctx.globalCompositeOperation = 'source-over';
       this.ctx.fillStyle = 'black';
