@@ -145,28 +145,28 @@
           rotation: -3.48 / 360 * Math.PI * 2,
           texture: this.inputs.j,
         }, {
-          x: 680,
-          y: 330,
+          x: 680 + 228,
+          y: 330 + 556,
           rotation: -130.97 / 360 * Math.PI * 2,
           texture: this.inputs.k,
         }, {
-          x: 957,
-          y: 190,
+          x: 957 + 214,
+          y: 190 + 625,
           rotation: 0,
           texture: this.inputs.l,
         }, {
-          x: 878,
-          y: 400,
+          x: 878 + 230,
+          y: 400 + 205,
           rotation: -19 / 360 * Math.PI * 2,
           texture: this.inputs.m,
         }, {
-          x: 0,
-          y: 0,
+          x: 0 + 960,
+          y: 0 + 535,
           rotation: -90 / 360 * Math.PI * 2,
           texture: this.inputs.n,
         }, {
-          x: 616,
-          y: 599,
+          x: 616 + 0,
+          y: 599 - 11,
           rotation: -56.12 / 360 * Math.PI * 2,
           texture: this.inputs.o,
         }, {
