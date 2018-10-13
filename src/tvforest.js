@@ -32,6 +32,22 @@
                        0, 0, Math.PI * 2);
       this.ctx.fill();
 
+      this.ctx.fillStyle = '#000000';
+      this.ctx.beginPath();
+      this.ctx.ellipse(808 + Math.sin(this.frame / 30),
+                       272 + Math.sin(this.frame / 30) * 5,
+                       4,
+                       4,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
+      this.ctx.beginPath();
+      this.ctx.ellipse(840 + Math.sin(this.frame / 30),
+                       338 + Math.sin(this.frame / 30) * 5,
+                       4,
+                       4,
+                       0, 0, Math.PI * 2);
+      this.ctx.fill();
+
 
       // 1496 x 195
 

@@ -50,6 +50,33 @@
                        0, 0, Math.PI);
       this.ctx.fill();
 
+      this.ctx.fillRect(718, 802, 200, 146);
+      this.ctx.fillRect(1010, 802, 250, 146);
+
+      this.ctx.save();
+      this.ctx.translate(931, 911);
+      this.ctx.rotate(smoothstep(-.2, .1, (this.frame - 5130) / 55));
+      this.ctx.drawImage(
+        this.imageElement,
+        718, 802,
+        210, 143,
+        -213, -109,
+        210, 143
+      );
+      this.ctx.restore();
+
+      this.ctx.save();
+      this.ctx.translate(990, 911);
+      this.ctx.rotate(smoothstep(.2, -.1, (this.frame - 5130) / 55));
+      this.ctx.drawImage(
+        this.imageElement,
+        1000, 802,
+        240, 143,
+        10, -109,
+        240, 143
+      );
+      this.ctx.restore();
+
 
       this.ctx.restore();
     }
