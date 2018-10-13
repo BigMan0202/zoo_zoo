@@ -21,6 +21,8 @@
 
       this.imageElement = document.createElement('img');
       Loader.load('res/seamonster.png', this.imageElement, () => null);
+      this.sunElement = document.createElement('img');
+      Loader.load('res/sun.png', this.sunElement, () => null);
     }
 
     update(frame) {
@@ -36,9 +38,16 @@
     render() {
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.translate(1920 / 2, 1080 / 2);
+      this.ctx.drawImage(this.imageElement, 0, 0);
 
-      this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
+      this.ctx.save();
+      this.ctx.translate(409, 209);
+      this.ctx.rotate(0.45 - this.frame / 200);
+      this.ctx.drawImage(
+        this.sunElement,
+        -283.5, -271.5
+      );
+      this.ctx.restore();
 
       this.ctx.restore();
     }
