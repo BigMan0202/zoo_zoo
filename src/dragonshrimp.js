@@ -9,10 +9,10 @@
 
       this.output = {
         canvas: document.createElement('canvas'),
-        x: 1625 - 960,
-        y: 239 - 540,
+        x: 957 - 960,
+        y: 190 - 540,
         zoom: 4,
-        rotation: -18.53 / 360 * Math.PI * 2,
+        rotation: 0,
       };
       this.outputs.render.setValue(this.output);
 
@@ -53,7 +53,7 @@
         },
         {
           x: 822,
-          y: 201,
+          y: 211,
           radius: 20,
           openBean: 32,
           closeBean: 48,
