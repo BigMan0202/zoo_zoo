@@ -1,32 +1,21 @@
 (function(global) {
-  class holes extends NIN.Node {
+  class holes extends ImageNode {
     constructor(id) {
       super(id, {
         outputs: {
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 740.64 - 960,
-        y: 649 - 540,
-        zoom: 4,
-        rotation: -66.55 / 360 * Math.PI * 2,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/holes.png', this.imageElement, () => null);
       this.fly1 = document.createElement('img');
       Loader.load('res/fly1.png', this.fly1, () => null);
       this.fly2 = document.createElement('img');
       Loader.load('res/fly2.png', this.fly2, () => null);
       this.fly3 = document.createElement('img');
       Loader.load('res/fly3.png', this.fly3, () => null);
+    }
+
+    getImageName() {
+      return 'res/holes.png';
     }
 
     update(frame) {
@@ -50,16 +39,10 @@
       };
     }
 
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
-    }
-
     render() {
+      super.render();
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-
-      this.ctx.drawImage(this.imageElement, 0, 0);
 
       this.ctx.save();
       this.ctx.translate(this.flyPosition1.x, this.flyPosition1.y);

@@ -45,53 +45,131 @@
       Loader.load('res/title.png', this.title, () => null);
 
       this.scenes = [{
-        x: 1666,
-        y: 527,
-        rotation: 0,
-        texture: this.inputs.a,
-      }, {
-        x: 1666,
-        y: 527,
-        rotation: 0,
-        texture: this.inputs.b,
-      }, {
-        x: 1009,
-        y: 680,
-        rotation: 0,
-        texture: this.inputs.c,
-      }, {
-        x: 829,
-        y: 600,
-        rotation: 0,
-        texture: this.inputs.d,
-      }, {
-        x: 960,
-        y: 664,
-        rotation: 0,
-        texture: this.inputs.e,
-      },
-        /*
-        this.inputs.f,
-        this.inputs.g,
-        this.inputs.h,
-        this.inputs.h1,
-        this.inputs.h2,
-        this.inputs.h3,
-        this.inputs.h4,
-        this.inputs.h5,
-        this.inputs.h6,
-        this.inputs.i,
-        this.inputs.j,
-        this.inputs.k,
-        this.inputs.l,
-        this.inputs.m,
-        this.inputs.n,
-        this.inputs.o,
-        this.inputs.p,
-        this.inputs.q,
-        this.inputs.r,
-        this.inputs.s,
-        */
+          x: 1666,
+          y: 527,
+          rotation: 0,
+          texture: this.inputs.a,
+        }, {
+          x: 1666,
+          y: 527,
+          rotation: 0,
+          texture: this.inputs.b,
+        }, {
+          x: 1009,
+          y: 680,
+          rotation: 0,
+          texture: this.inputs.c,
+        }, {
+          x: 829,
+          y: 600,
+          rotation: 0,
+          texture: this.inputs.d,
+        }, {
+          x: 960,
+          y: 664,
+          rotation: 0,
+          texture: this.inputs.e,
+        }, {
+          x: 960,
+          y: 664,
+          rotation: 0,
+          texture: this.inputs.f,
+        }, {
+          x: 563.14,
+          y: 607.61,
+          rotation: 0,
+          texture: this.inputs.g,
+        }, {
+          x: 709,
+          y: 391,
+          rotation: -24.14 / 360 * Math.PI * 2,
+          texture: this.inputs.h,
+        }, {
+          x: 960,
+          y: 540,
+          rotation: 0,
+          texture: this.inputs.h1,
+        }, {
+          x: 960,
+          y: 540,
+          rotation: Math.PI / 2,
+          texture: this.inputs.h2,
+        }, {
+          x: 1235,
+          y: 437,
+          rotation: 27.16 / 360 * Math.PI * 2,
+          texture: this.inputs.h3,
+        }, {
+          x: 740.64,
+          y: 649,
+          rotation: -66.55 / 360 * Math.PI * 2,
+          texture: this.inputs.h4,
+        }, {
+          x: 644,
+          y: 496,
+          rotation: 42.79 / 360 * Math.PI * 2,
+          texture: this.inputs.h5,
+        }, {
+          x: 1208,
+          y: 414,
+          rotation: -27.45 / 360 * Math.PI * 2,
+          texture: this.inputs.h6,
+        }, {
+          x: 960,
+          y: 540,
+          rotation: Math.PI,
+          texture: this.inputs.i,
+        }, {
+          x: 960,
+          y: 540,
+          rotation: -3.48 / 360 * Math.PI * 2,
+          texture: this.inputs.j,
+        }, {
+          x: 680,
+          y: 330,
+          rotation: -130.97 / 360 * Math.PI * 2,
+          texture: this.inputs.k,
+        }, {
+          x: 957,
+          y: 190,
+          rotation: 0,
+          texture: this.inputs.l,
+        }, {
+          x: 878,
+          y: 400,
+          rotation: -19 / 360 * Math.PI * 2,
+          texture: this.inputs.m,
+        }, {
+          x: 0,
+          y: 0,
+          rotation: -90 / 360 * Math.PI * 2,
+          texture: this.inputs.n,
+        }, {
+          x: 616,
+          y: 599,
+          rotation: -56.12 / 360 * Math.PI * 2,
+          texture: this.inputs.o,
+        }, {
+          x: 1548,
+          y: 769,
+          rotation: 19.65 / 360 * Math.PI * 2,
+          texture: this.inputs.p,
+        }, {
+          x: 1299,
+          y: 297,
+          rotation: -126.78 / 360 * Math.PI * 2,
+          texture: this.inputs.q,
+        }, {
+          x: 635,
+          y: 471,
+          rotation: -43.66 / 360 * Math.PI * 2,
+          texture: this.inputs.r,
+        }, {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          texture: this.inputs.s,
+        },
       ];
 
 

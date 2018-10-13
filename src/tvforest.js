@@ -6,31 +6,6 @@
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 1208 - 960,
-        y: 414 - 540,
-        zoom: 4,
-        rotation: -27.45 / 360 * Math.PI * 2,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/tvforest.png', this.imageElement, () => null);
-    }
-
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
-    }
-
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
     }
 
     render() {
@@ -82,6 +57,10 @@
         this.ctx.fill();
       }
       this.ctx.restore();
+    }
+
+    getImageName() {
+      return 'res/tvforest.png';
     }
   }
 
