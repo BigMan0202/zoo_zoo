@@ -35,9 +35,9 @@
 
       // 1496 x 195
 
-      if (BEAN >= 1739) {
+      if (BEAN >= 2358) {
         // start eye blink 
-        const closeEye = this.frame <= 3359 ? easeOut(0, 1, (this.frame - 3344) / 10) : easeIn(1, 0, (this.frame - 3359)/ 10)
+        const closeEye = this.frame < 4552 ? easeOut(0, 1, (this.frame - 4537) / 10) : easeIn(1, 0, (this.frame - 4552)/ 10)
         this.ctx.beginPath();
         this.ctx.ellipse(1496 + (90 * closeEye),
                           160,
