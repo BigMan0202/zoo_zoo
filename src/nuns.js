@@ -20,8 +20,8 @@
       this.tooth6 = document.createElement('img');
       Loader.load('res/tooth6.png', this.tooth6, () => null);
 
-      this.startAni1 = 738;
-      this.startAni2 = 798;
+      this.startAni1 = 830;
+      this.startAni2 = 942;
     }
 
     render() {
@@ -49,29 +49,29 @@
 
 
 
-      if (BEAN < 406){
+      if (BEAN < 486){
         if (this.frame >= this.startAni1)
           this.ctx.drawImage(this.tooth1, tooth1X, tooth1Y);
-        if (this.frame >= this.startAni1 + 10)
-          this.ctx.drawImage(this.tooth2, tooth2X, tooth2Y);
         if (this.frame >= this.startAni1 + 20)
-          this.ctx.drawImage(this.tooth3, tooth3X, tooth3Y);
-        if (this.frame >= this.startAni1 + 30)
-          this.ctx.drawImage(this.tooth4, tooth4X, tooth4Y);
-        if (this.frame >= this.startAni1 + 40)
-          this.ctx.drawImage(this.tooth5, tooth5X, tooth5Y);
-        if (this.frame >= this.startAni1 + 50)
-          this.ctx.drawImage(this.tooth6, tooth6X, tooth6Y);
-      } else if (BEAN < 445) {
-        if (this.frame <= this.startAni2 + 50)
-          this.ctx.drawImage(this.tooth1, tooth1X, tooth1Y);
-        if (this.frame <= this.startAni2 + 40)
           this.ctx.drawImage(this.tooth2, tooth2X, tooth2Y);
-        if (this.frame <= this.startAni2 + 30)
+        if (this.frame >= this.startAni1 + 40)
           this.ctx.drawImage(this.tooth3, tooth3X, tooth3Y);
-        if (this.frame <= this.startAni2 + 20)
+        if (this.frame >= this.startAni1 + 60)
           this.ctx.drawImage(this.tooth4, tooth4X, tooth4Y);
-        if (this.frame <= this.startAni2 + 10)
+        if (this.frame >= this.startAni1 + 80)
+          this.ctx.drawImage(this.tooth5, tooth5X, tooth5Y);
+        if (this.frame >= this.startAni1 + 100)
+          this.ctx.drawImage(this.tooth6, tooth6X, tooth6Y);
+      } else if (BEAN < 550) {
+        if (this.frame <= this.startAni2 + 100)
+          this.ctx.drawImage(this.tooth1, tooth1X, tooth1Y);
+        if (this.frame <= this.startAni2 + 80)
+          this.ctx.drawImage(this.tooth2, tooth2X, tooth2Y);
+        if (this.frame <= this.startAni2 + 60)
+          this.ctx.drawImage(this.tooth3, tooth3X, tooth3Y);
+        if (this.frame <= this.startAni2 + 40)
+          this.ctx.drawImage(this.tooth4, tooth4X, tooth4Y);
+        if (this.frame <= this.startAni2 + 20)
           this.ctx.drawImage(this.tooth5, tooth5X, tooth5Y);
         if (this.frame <= this.startAni2)
           this.ctx.drawImage(this.tooth6, tooth6X, tooth6Y);
