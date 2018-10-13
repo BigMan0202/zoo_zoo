@@ -1,26 +1,11 @@
 (function(global) {
-  class nuns extends NIN.Node {
+  class nuns extends ImageNode {
     constructor(id) {
       super(id, {
         outputs: {
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 829 - 960,
-        y: 600 - 540,
-        zoom: 4,
-        rotation: 0,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/nuns.png', this.imageElement, () => null);
 
       this.tooth1 = document.createElement('img');
       Loader.load('res/tooth1.png', this.tooth1, () => null);
@@ -39,20 +24,10 @@
       this.startAni2 = 798;
     }
 
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
-    }
-
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
-    }
-
     render() {
+      super.render();
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.drawImage(this.imageElement, 0, 0);
 
       // first bean 313
       this.ctx.save();
@@ -106,6 +81,10 @@
       // last bean 458
 
       this.ctx.restore();
+    }
+
+    getImageName() {
+      return 'res/nuns.png';
     }
   }
 

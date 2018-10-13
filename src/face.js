@@ -1,26 +1,11 @@
 (function(global) {
-  class face extends NIN.Node {
+  class face extends ImageNode {
     constructor(id) {
       super(id, {
         outputs: {
           render: new NIN.Output()
         }
       });
-
-      this.output = {
-        canvas: document.createElement('canvas'),
-        x: 960 - 960,
-        y: 644 - 540 + 20,
-        zoom: 100 / 15.52,
-        rotation: 0,
-      };
-      this.outputs.render.setValue(this.output);
-
-      this.ctx = this.output.canvas.getContext('2d');
-      this.resize();
-
-      this.imageElement = document.createElement('img');
-      Loader.load('res/face.png', this.imageElement, () => null);
 
       this.tooth1 = document.createElement('img');
       Loader.load('res/tooth1.png', this.tooth1, () => null);
@@ -40,17 +25,8 @@
       this.startAni3 = 997;
     }
 
-    update(frame) {
-      super.update(frame);
-      this.frame = frame;
-    }
-
-    resize() {
-      this.output.canvas.width = 16 * GU;
-      this.output.canvas.height = 9 * GU;
-    }
-
     render() {
+      super.render();
       this.ctx.save();
       this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
       this.ctx.translate(1920 / 2, 1080 / 2);
@@ -68,8 +44,6 @@
       const tooth5Y = tooth1Y + 10;
       const tooth6X = tooth1X + 25;
       const tooth6Y = tooth1Y + 16;
-
-      this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
 
       // first bean 459
       if (BEAN <= 489){
@@ -133,6 +107,10 @@
       // end at 1176 (ani 3 is ~176 frames)
 
       this.ctx.restore();
+    }
+
+    getImageName() {
+      return 'res/face.png';
     }
   }
 

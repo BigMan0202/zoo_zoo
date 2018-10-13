@@ -44,19 +44,33 @@
       this.title = document.createElement('img');
       Loader.load('res/title.png', this.title, () => null);
 
-      this.canvas = document.createElement('canvas');
-      this.ctx = this.canvas.getContext('2d');
-      this.resize();
-      this.output = new THREE.VideoTexture(this.canvas);
-      this.output.minFilter = THREE.LinearFilter;
-      this.output.magFilter = THREE.LinearFilter;
-
-      this.scenes = [
-        this.inputs.a,
-        this.inputs.b,
-        this.inputs.c,
-        this.inputs.d,
-        this.inputs.e,
+      this.scenes = [{
+        x: 1666,
+        y: 527,
+        rotation: 0,
+        texture: this.inputs.a,
+      }, {
+        x: 1666,
+        y: 527,
+        rotation: 0,
+        texture: this.inputs.b,
+      }, {
+        x: 1009,
+        y: 680,
+        rotation: 0,
+        texture: this.inputs.c,
+      }, {
+        x: 829,
+        y: 600,
+        rotation: 0,
+        texture: this.inputs.d,
+      }, {
+        x: 960,
+        y: 664,
+        rotation: 0,
+        texture: this.inputs.e,
+      },
+        /*
         this.inputs.f,
         this.inputs.g,
         this.inputs.h,
@@ -77,74 +91,104 @@
         this.inputs.q,
         this.inputs.r,
         this.inputs.s,
+        */
       ];
 
+
+      const curvePoints = [];
+      let accumulatedX = 0;
+      let accumulatedY = 0;
+      for(let i = 0; i < this.scenes.length; i++) {
+        const geometry = new THREE.PlaneBufferGeometry(1920, 1080);
+        const scene = this.scenes[i];
+        const x = (scene.x - 960) || 0;
+        const y = (scene.y - 540) || 0;
+        accumulatedX -= x;
+        accumulatedY -= y;
+        const point = new THREE.Vector3(accumulatedX, accumulatedY, -i * 500);
+        curvePoints[i] = point;
+
+
+        const mesh = new THREE.Mesh(
+          geometry,
+          new THREE.MeshBasicMaterial({map: scene.texture.getValue()}));
+        mesh.position.x = x;
+        mesh.position.y = y;
+        mesh.rotation.y = Math.PI;
+        const container = new THREE.Object3D();
+        container.position.x = point.x;
+        container.position.y = point.y;
+        container.position.z = point.z;
+        scene.mesh = mesh;
+        container.add(mesh);
+        scene.container = container;
+        this.scene.add(container);
+
+        const debugHotspot = new THREE.Mesh(
+          new THREE.BoxGeometry(20, 20, 20),
+          new THREE.MeshBasicMaterial({color: 0xff00ff}));
+        container.add(debugHotspot);
+
+        const debugCenter = new THREE.Mesh(
+          new THREE.BoxGeometry(20, 20, 20),
+          new THREE.MeshBasicMaterial({color: 0x0000ff}));
+        debugCenter.position.x = x;
+        debugCenter.position.y = y;
+        container.add(debugCenter);
+      }
+
+      this.camera = new THREE.OrthographicCamera(
+        -1920 / 2, 1920 / 2,
+        1080 / 2, -1080 / 2,
+        0.001, 1000000);
+
+      this.cameraPath = new THREE.CatmullRomCurve3(curvePoints);
+
       this.throb = 0;
+
     }
 
     beforeUpdate(frame) {
       for (const scene of this.scenes) {
-        scene.enabled = false;
+        scene.texture.enabled = true;
       }
-      const numBars = Math.max(0, ((BEAN / 48) | 0) - 8);
-      const nextBackBean = 8 * 48 + numBars * 48 + 24;
-      const throbTime = lerp(0, 1, (frame - FRAME_FOR_BEAN(nextBackBean - 4)) / (FRAME_FOR_BEAN(nextBackBean + 4) - FRAME_FOR_BEAN(nextBackBean - 4)));
-      const throb = 10 * (Math.sin(0.5 * Math.PI * throbTime) + numBars);
-      this.progress = (frame + throb) / 300;
+
+      this.progress = Math.min(0, frame / 300);
       const currentScene = this.scenes[this.progress | 0];
-      currentScene.enabled = true;
+      currentScene.texture.enabled = true;
       const nextScene = this.scenes[(this.progress + 1) | 0];
-      nextScene.enabled = true;
+      nextScene.texture.enabled = true;
 
-      this.currentImage = currentScene.getValue();
-      this.nextImage = nextScene.getValue();
     }
 
-    resize() {
-      this.canvas.width = 16 * GU;
-      this.canvas.height = 9 * GU;
-    }
+    update(frame) {
+      this.progress = frame / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.currentScene = this.scenes[(this.progress) | 0];
+      this.nextScene = this.scenes[(this.progress + 1) | 0];
+      const t = Math.max((this.progress - 1) / (this.scenes.length - 1), 0);
+      const point = this.cameraPath.getPoint(t);
 
-    render() {
-      this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
-      this.ctx.translate(1920 / 2, 1080 / 2);
+      this.camera.position.x = point.x;
+      this.camera.position.y = point.y;
+      this.camera.position.z = point.z - 999.9;
+      this.camera.lookAt(new THREE.Vector3(point.x, point.y, point.z + 1));
 
-      this.ctx.save();
-      const t = this.progress % 1;
-      const x = lerp(0, this.currentImage.x, t);
-      const y = lerp(0, this.currentImage.y, t);
-      const zoom = lerp(1, this.currentImage.zoom, Math.pow(2, 1 + t) / 2 - 1);
+      const currentScale = Math.exp(Math.log(4) * (this.progress % 1));
+      this.currentScene.container.scale.set(currentScale, currentScale, 1);
+      const nextScale = Math.exp(Math.log(0.25) * (1 - (this.progress % 1)));
+      this.nextScene.mesh.scale.set(nextScale, nextScale, 1);
 
-      const rotation = lerp(0, this.currentImage.rotation, t);
 
-      this.ctx.rotate(rotation);
-      this.ctx.translate(-x * zoom, -y * zoom);
-      this.ctx.scale(zoom, zoom);
-
-      this.ctx.drawImage(this.currentImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
-
-      this.ctx.scale(1 / this.currentImage.zoom, 1 / this.currentImage.zoom);
-      this.ctx.translate(this.currentImage.x * this.currentImage.zoom,
-                         this.currentImage.y * this.currentImage.zoom);
-      this.ctx.rotate(-this.currentImage.rotation);
-
-      this.ctx.drawImage(this.nextImage.canvas, -1920 / 2, -1080 / 2, 1920, 1080);
-
-      this.ctx.restore();
-
-      if(BEAN < 384) {
-        this.ctx.drawImage(this.title, -1920 / 2, -1080 / 2);
+      if(this.currentScene.texture.getValue()) {
+        this.currentScene.mesh.material.map = this.currentScene.texture.getValue();
+        this.currentScene.mesh.material.needsUpdate = true;
+        this.currentScene.mesh.material.map.needsUpdate = true;
       }
-
-      this.ctx.restore();
-
-      this.output.needsUpdate = true;
-      this.outputs.render.setValue(this.output);
-      this.outputs.zoom.setValue(zoom);
-      this.outputs.rotation.setValue(rotation);
-      this.outputs.x.setValue(x);
-      this.outputs.y.setValue(y);
+      if(this.nextScene.texture.getValue()) {
+        this.nextScene.mesh.material.map = this.nextScene.texture.getValue();
+        this.nextScene.mesh.material.needsUpdate = true;
+        this.nextScene.mesh.material.map.needsUpdate = true;
+      }
     }
   }
 
