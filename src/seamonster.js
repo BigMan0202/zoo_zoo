@@ -14,7 +14,7 @@
     render() {
       super.render();
       this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
 
       this.ctx.save();
       this.ctx.translate(409, 209);

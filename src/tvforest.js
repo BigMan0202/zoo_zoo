@@ -1,5 +1,5 @@
 (function(global) {
-  class tvforest extends NIN.Node {
+  class tvforest extends ImageNode {
     constructor(id) {
       super(id, {
         outputs: {
@@ -10,7 +10,7 @@
 
     render() {
       this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.drawImage(this.imageElement, 0, 0);
 
       const grey = '#909090';

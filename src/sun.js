@@ -35,7 +35,7 @@
 
     render() {
       this.ctx.save();
-      this.ctx.scale(16 * GU / 1920, 16 * GU /  1920);
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.translate(1920 / 2, 1080 / 2);
 
       this.ctx.drawImage(this.imageElement, -1920 / 2, -1080 / 2);
