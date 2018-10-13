@@ -281,7 +281,9 @@
       this.currentScene = this.scenes[(this.progress) | 0];
       this.nextScene = this.scenes[(this.progress + 1) | 0];
       const t = Math.max((this.progress - 1) / (this.scenes.length - 1), 0);
+      const nextT = Math.max((this.progress - 0.5) / (this.scenes.length - 1), 0);
       const point = this.cameraPath.getPoint(t);
+      const nextPoint = this.cameraPath.getPoint(nextT);
       const rotation = this.rotationPath.getPoint(t).x;
 
       this.camera.position.x = point.x;
@@ -306,6 +308,10 @@
         this.nextScene.mesh.material.needsUpdate = true;
         this.nextScene.mesh.material.map.needsUpdate = true;
       }
+
+      this.outputs.x.setValue(nextPoint.x - point.x);
+      this.outputs.y.setValue(nextPoint.y - point.y);
+      this.outputs.rotation.setValue(this.camera.rotation.z);
     }
   }
 
