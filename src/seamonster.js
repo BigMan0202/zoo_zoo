@@ -42,7 +42,7 @@
 
       this.ctx.save();
       this.ctx.translate(409, 209);
-      this.ctx.rotate(0.45 - this.frame / 200);
+      this.ctx.rotate(0.72 - this.frame / 30);
       this.ctx.drawImage(
         this.sunElement,
         -283.5, -271.5
