@@ -28,12 +28,14 @@ void main() {
 
     float sizer = 4.;
 
-    vec2 uv = vUv * vec2(16./9., 1.) - vec2(.5 / 9. * 16., .5) + vec2(-x, y) / 960.;
-    uv *= 1.44 * 2.;
-    float len = sqrt(uv.x * uv.x + uv.y * uv.y);
-    float t = mod(frame / 60. / 60. * 156. / 4., 1.);
-    len -= t / sizer;
-    len -= 1.5 + throb;
-    color *= pow(0.25, max(0., t + floor(len * sizer)));
+    if(frame > 736.5) {
+        vec2 uv = vUv * vec2(16./9., 1.) - vec2(.5 / 9. * 16., .5) + vec2(-x, y) / 960.;
+        uv *= 1.44 * 2.;
+        float len = sqrt(uv.x * uv.x + uv.y * uv.y);
+        float t = mod(frame / 60. / 60. * 156. / 4., 1.);
+        len -= t / sizer;
+        len -= 1.5 + throb;
+        color *= pow(0.25, max(0., t + floor(len * sizer)));
+    }
     gl_FragColor = color;
 }
