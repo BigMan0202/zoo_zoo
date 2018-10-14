@@ -27,7 +27,7 @@
       "d": "nuns.render",
       "e": "face.render",
       "f": "teeth.render",
-      "g": "cocktail.render",
+      "g": "liquid.render",
       "h": "snakecharmer.render",
       "h1": "glassring.render",
       "h2": "innerglass.render",
@@ -172,7 +172,6 @@
     },
     "connected": {
       "texture": "yo.render",
-      "liquid": "liquid.render",
       "zoom": "yo.zoom",
       "x": "yo.x",
       "y": "yo.y"
@@ -182,10 +181,10 @@
     "id": "liquid",
     "type": "liquid",
     "connected": {
-      "rotation": "yo.rotation",
-      "zoom": "yo.rotation",
-      "x": "yo.x",
-      "y": "yo.y"
+      "bg": "cocktail.render"
+    },
+    "options": {
+      "shader": "liquid"
     }
   },
   {

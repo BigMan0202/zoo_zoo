@@ -42,18 +42,38 @@
   const MAX_PARTICLES = 2500;
 
   class liquid extends NIN.Node {
-    constructor(id) {
+    constructor(id, options) {
       super(id, {
         inputs: {
+          bg: new NIN.Input(),
           rotation: new NIN.Input(),
           zoom: new NIN.Input(),
           x: new NIN.Input(),
           y: new NIN.Input(),
         },
         outputs: {
-          render: new NIN.Output()
+          render: new NIN.TextureOutput(),
+          liquid: new NIN.TextureOutput(),
         }
       });
+
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 100);
+      this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBFormat
+      });
+
+      const shader = typeof options.shader === 'string'
+        ? SHADERS[options.shader] : options.shader;
+
+      this.quad = new THREE.Mesh(
+        new THREE.PlaneBufferGeometry(2, 2),
+        new THREE.ShaderMaterial(shader).clone());
+      this.uniforms = this.quad.material.uniforms;
+
+      this.scene.add(this.quad);
 
       this.particles = [];
 
@@ -64,15 +84,15 @@
           this.particles.push(new Particle(x, y));
         }
       }
+
       this.canvas = document.createElement('canvas');
 
       this.ctx = this.canvas.getContext('2d');
       this.resize();
-      this.outputs.render.setValue(this.output);
-      this.output = new THREE.CanvasTexture(this.canvas);
-      this.output.minFilter = THREE.LinearFilter;
-      this.output.magFilter = THREE.LinearFilter;
-      this.outputs.render.setValue(this.texture);
+      this.texture = new THREE.CanvasTexture(this.canvas);
+      this.texture.minFilter = THREE.LinearFilter;
+      this.texture.magFilter = THREE.LinearFilter;
+      this.outputs.liquid.setValue(this.texture);
     }
 
 
@@ -161,7 +181,7 @@
             viscosityY += VISC * MASS * (pj.velocityY - pi.velocityY) / pj.rho * VISC_LAP * (H - r);
           }
         }
-        const rotation = this.inputs.rotation.getValue() + Math.PI;
+        const rotation = window.HACKY_ROTATION_SHARE_SERVICE_DELUXE + Math.PI;
         const gravityX = Math.sin(rotation) * GRAVITY_Y * pi.rho;
         const gravityY = Math.cos(rotation) * GRAVITY_Y * pi.rho;
         pi.forceX = pressureX + viscosityX + gravityX;
@@ -170,7 +190,6 @@
     }
 
     update(frame) {
-      return;
       super.update(frame);
       this.frame = frame;
 
@@ -185,10 +204,21 @@
       this.computeDensityPressure();
       this.computeForces();
       this.integrate();
+
+      this.uniforms.frame.value = frame;
+      this.uniforms.bg.value = this.inputs.bg.getValue();
+      this.uniforms.liquid.value = this.texture;
+      this.uniforms.zoom.value = this.inputs.zoom.getValue();
+      this.uniforms.x.value = this.inputs.x.getValue();
+      this.uniforms.y.value = this.inputs.y.getValue();
+      this.uniforms.throb.value = this.throb;
     }
 
-    render() {
-      return;
+    render(renderer) {
+
+      renderer.render(this.scene, this.camera, this.renderTarget, true);
+      this.outputs.render.setValue(this.renderTarget.texture);
+
       this.ctx.save();
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -209,31 +239,10 @@
 
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width / 1920);
 
-
-      const xyo = 563.14 + lerp(440, 0, progress);
-      const yyo = 607.6 + lerp(-590, 0, progress);
-      this.ctx.translate(xyo, yyo);
-      this.ctx.scale(scaler, scaler);
-      this.ctx.rotate(rotation + 0.1);
-      this.ctx.fillRect(-5, -5, 10, 10);
-
-      this.ctx.fillStyle = 'white';
-      this.ctx.translate(-xyo, -yyo);
-
-
-      this.ctx.fillStyle = 'black';
-      this.ctx.strokeRect(0, 0, 1920, 1080);
-      /*
-      this.ctx.fillRect(0, 0, 1920, 1080);
-      */
-
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(-10, -10, 10, 10);
-
       this.ctx.globalAlpha = 0.1;
       this.ctx.globalCompositeOperation = 'lighter';
-      this.ctx.translate(650, 300);
-      this.ctx.scale(0.2, 0.2);
+      this.ctx.translate(450, 230);
+      this.ctx.scale(0.3, 0.3);
       for(const p of this.particles) {
         this.ctx.save();
         this.ctx.translate(p.positionX, p.positionY);
@@ -247,35 +256,17 @@
 
       this.ctx.restore();
 
-      /*
-      this.ctx.globalAlpha = 0.1;
-      this.ctx.globalCompositeOperation = 'source-over';
-      this.ctx.fillStyle = 'black';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.globalAlpha = 0.05;
-      this.ctx.globalCompositeOperation = 'lighter';
-      const size = H;
-      this.ctx.save();
-      this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-      this.ctx.scale(scaler, scaler);
-      this.ctx.translate(600, 500);
-      this.ctx.rotate(rotation);
-      this.ctx.globalAlpha = 1;
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(0, 0, this.canvas.width / 2, this.canvas.height / 2);
-      this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
-      this.ctx.restore();
-      */
-
-      this.output.needsUpdate = true;
-      this.outputs.render.setValue(this.output);
+      this.texture.needsUpdate = true;
+      this.outputs.liquid.setValue(this.texture);
     }
 
     resize() {
-      this.canvas.width = 16 * GU;
-      this.canvas.height = 9 * GU;
-
-      this.makeSprite();
+      this.renderTarget.setSize(16 * GU, 9 * GU);
+      if(this.canvas) {
+        this.canvas.width = 16 * GU;
+        this.canvas.height = 9 * GU;
+        this.makeSprite();
+      }
     }
   }
 

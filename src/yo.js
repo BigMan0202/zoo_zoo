@@ -102,15 +102,16 @@
         }, {
           x: 1169,
           y: 406,
-          rotation: Math.PI * 0 + -185.93 / 360 * Math.PI * 2,
+          rotation: -185.93 / 360 * Math.PI * 2,
           texture: this.inputs.f,
-        }, { x: 563.14 - 5,
-          y: 607.61 - 83,
+        }, {
+          x: 563.14 - 5 * 0,
+          y: 607.61 - 83 * 0,
           rotation: 26.85 / 360 * Math.PI * 2 + 0.00,
           texture: this.inputs.g,
         }, {
-          x: 709 - 35,
-          y: 391 + 205,
+          x: 709 - 35 * 0,
+          y: 391 + 205 * 0,
           rotation: -24.14 / 360 * Math.PI * 2,
           texture: this.inputs.h,
         }, {
@@ -124,23 +125,23 @@
           rotation: Math.PI / 2,
           texture: this.inputs.h2,
         }, {
-          x: 1235 - 560,
-          y: 437 + 173,
+          x: 1235 - 560 * 0,
+          y: 437 + 173 * 0,
           rotation: 27.16 / 360 * Math.PI * 2,
           texture: this.inputs.h3,
         }, {
-          x: 740.64 + 285,
-          y: 649 - 345,
+          x: 740.64 + 285 * 0,
+          y: 649 - 345 * 0,
           rotation: -66.55 / 360 * Math.PI * 2,
           texture: this.inputs.h4,
         }, {
-          x: 644 + 300,
-          y: 496 + 360,
+          x: 644 + 300 * 0,
+          y: 496 + 360 * 0,
           rotation: 42.79 / 360 * Math.PI * 2,
           texture: this.inputs.h5,
         }, {
-          x: 1208 - 496,
-          y: 414 + 253,
+          x: 1208 - 496 * 0,
+          y: 414 + 253 * 0,
           rotation: -27.45 / 360 * Math.PI * 2,
           texture: this.inputs.h6,
         }, {
@@ -154,28 +155,28 @@
           rotation: -3.48 / 360 * Math.PI * 2,
           texture: this.inputs.j,
         }, {
-          x: 680 + 228,
-          y: 330 + 556,
+          x: 680 + 228 * 0,
+          y: 330 + 556 * 0,
           rotation: -130.97 / 360 * Math.PI * 2,
           texture: this.inputs.k,
         }, {
-          x: 957 + 214,
-          y: 190 + 625,
+          x: 957 + 214 * 0,
+          y: 190 + 625 * 0,
           rotation: 0,
           texture: this.inputs.l,
         }, {
-          x: 878 + 230,
-          y: 400 + 205,
+          x: 878 + 230 * 0,
+          y: 400 + 205 * 0,
           rotation: -19 / 360 * Math.PI * 2,
           texture: this.inputs.m,
         }, {
-          x: 0 + 960,
-          y: 0 + 535,
+          x: 0 + 960 * 0,
+          y: 0 + 535 * 0,
           rotation: -90 / 360 * Math.PI * 2,
           texture: this.inputs.n,
         }, {
-          x: 616 + 0,
-          y: 599 - 11,
+          x: 616 + 0 * 0,
+          y: 599 - 11 * 0,
           rotation: -56.12 / 360 * Math.PI * 2,
           texture: this.inputs.o,
         }, {
@@ -212,13 +213,19 @@
         const geometry = new THREE.PlaneBufferGeometry(1920, 1080);
         const scene = this.scenes[i];
         const previousScene = this.scenes[Math.max(i - 1, 0)];
-        const x = (scene.x - 960) || 0;
-        const y = (scene.y - 540) || 0;
         accumulatedRotation += scene.rotation;
         accumulatedPreviousRotation += previousScene.rotation;
-        const temp = rotatePoint({x: accumulatedX - x, y: accumulatedY - y}, accumulatedPreviousRotation, {x: accumulatedX, y: accumulatedY});
-        accumulatedX = temp.x;
-        accumulatedY = temp.y;
+        let x = (scene.x - 960) || 0;
+        let y = (scene.y - 540) || 0;
+        console.log('step', i);
+        console.log('accumulatedPreviousRotation', accumulatedPreviousRotation);
+        console.log('pre-rotation', x, y);
+        let temp = rotatePoint({x, y}, -accumulatedPreviousRotation, {x: 0, y: 0});
+        //temp = rotatePoint(temp, scene.rotation, {x, y});
+        console.log('post-rotation', temp.x, temp.y);
+
+        accumulatedX -= temp.x;
+        accumulatedY -= temp.y;
         const point = new THREE.Vector3(accumulatedX, accumulatedY, -i * 500);
         curvePoints[i] = point;
         rotationPoints[i] = new THREE.Vector3(accumulatedRotation, accumulatedRotation, accumulatedRotation);
@@ -226,7 +233,7 @@
         const mesh = new THREE.Mesh(
           geometry,
           new THREE.MeshBasicMaterial({map: scene.texture.getValue()}));
-        const rotated = rotatePoint({x: x, y: y}, accumulatedPreviousRotation, {x: 0, y: 0});
+        const rotated = rotatePoint({x: x, y: y}, -accumulatedPreviousRotation, {x: 0, y: 0});
         mesh.position.x = rotated.x;
         mesh.position.y = rotated.y;
         mesh.rotation.y = Math.PI;
@@ -266,6 +273,8 @@
 
       this.throb = 0;
 
+      console.log(curvePoints);
+
     }
 
     beforeUpdate(frame) {
@@ -303,14 +312,16 @@
       this.camera.position.z = point.z - 999.9;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
+      window.HACKY_ROTATION_SHARE_SERVICE_DELUXE = this.camera.rotation.z;
 
       this.titleMesh.position.x = this.camera.position.x;
       this.titleMesh.position.y = this.camera.position.y;
       this.titleMesh.position.z = this.camera.position.z + 1;
       this.titleMesh.rotation.z = Math.PI + this.camera.rotation.z;
-      const titleScaler = easeIn(1, 4, F(frame, 360, 24));
-      this.titleMesh.position.x += easeIn(0, 1500, F(frame, 360, 24));
-      this.titleMesh.position.y += easeIn(0, -200, F(frame, 360, 24));
+      const titleStep = F(frame, 360 - 48, 24 + 48);
+      const titleScaler = easeIn(1, 4, titleStep);
+      this.titleMesh.position.x += easeIn(0, 1500, titleStep);
+      this.titleMesh.position.y += easeIn(0, -200, titleStep);
       this.titleMesh.scale.set(titleScaler, titleScaler, 1);
 
       this.titleMesh.visible = BEAN < 384;
