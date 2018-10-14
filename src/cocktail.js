@@ -15,7 +15,7 @@
 
       this.ctx.save();
       this.ctx.translate(1005.5, 800);
-      const t = easeIn(0, 1, (this.frame - 1847) / 500);
+      const t = smoothstep(0, 1, (this.frame - 2215) / 700);
       this.ctx.rotate(t * 0.2);
       const yOffset = (Math.sin(t * 30 - Math.PI / 2) + 1) * 95;
       this.ctx.drawImage(
@@ -37,7 +37,7 @@
 
       this.ctx.save();
       this.ctx.translate(1220, 180);
-      const localT = easeIn(0, 1, (this.frame - 1847) / 500);
+      const localT = smoothstep(0, 1, (this.frame - 2215) / 700);
       const y2Offset = (Math.sin(localT * 30 - Math.PI / 2) + 1) * 40;
       this.ctx.drawImage(
         this.imageElement,

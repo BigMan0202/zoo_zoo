@@ -22,20 +22,22 @@
       super.update(frame);
       this.frame = frame;
 
+      const tStart = (frame - 4061) / 60;
+
       this.flyPosition1 = {
-        x: 220 + Math.sin(frame / 20) * 10 + 255/2,
-        y: 120 + Math.cos(frame / 12) * 10 + 268/2,
-        rotation: Math.sin(frame / 40) / 4,
+        x: 215 + lerp(0, Math.sin(frame / 20) * 10, tStart) + 255/2,
+        y: 112 + lerp(0, Math.cos(frame / 12) * 10, tStart) + 268/2,
+        rotation: lerp(0, Math.sin(frame / 40) / 4, tStart),
       };
       this.flyPosition2 = {
-        x: 1330 + Math.sin(frame / 10) * 10 + 261/2,
-        y: 220 + Math.cos(frame / 5) * 8 + 249/2,
-        rotation: Math.sin(frame / 50) / 2,
+        x: 1320 + lerp(0, Math.sin(frame / 10) * 10, tStart) + 261/2,
+        y: 215 + lerp(0, Math.cos(frame / 5) * 8, tStart) + 249/2,
+        rotation: lerp(0, Math.sin(frame / 50) / 2, tStart),
       };
       this.flyPosition3 = {
-        x: 1200 + Math.sin(frame / 15) * 12 + 264/2,
-        y: 665 + Math.cos(frame / 10) * 10 + 239/2,
-        rotation: 3.5 + frame / 100,
+        x: 1200 + lerp(0, Math.sin(frame / 15) * 12, tStart) + 264/2,
+        y: 665 + lerp(0, Math.cos(frame / 10) * 10, tStart) + 239/2,
+        rotation: lerp(0, (3.5 + frame / 100) % Math.PI * 2, tStart),
       };
     }
 
