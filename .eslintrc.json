@@ -41,6 +41,7 @@
       "easeOut": true,
       "easeIn": true,
       "smoothstep": true,
-      "elasticOut": true
+      "elasticOut": true,
+      "ImageNode": true
     }
 }
