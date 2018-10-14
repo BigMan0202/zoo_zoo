@@ -3,7 +3,7 @@
     constructor(id) {
       super(id);
 
-      this.tounge0 = document.createElement('img');
+      this.tounge1 = document.createElement('img');
       Loader.load('res/tounge1.png', this.tounge1, () => null);
       this.tounge2 = document.createElement('img');
       Loader.load('res/tounge2.png', this.tounge2, () => null);
