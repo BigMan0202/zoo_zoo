@@ -22,7 +22,7 @@
     "type": "yo",
     "connected": {
       "a": "title.render",
-      "b": "skyline.render",
+      "b": "starsky.render",
       "c": "church.render",
       "d": "nuns.render",
       "e": "face.render",
@@ -195,6 +195,16 @@
     },
     "connected": {
       "background": "seamonster.render"
+    }
+  },
+  {
+    "id": "starsky",
+    "type": "starskyNode",
+    "options": {
+      "shader": "starsky"
+    },
+    "connected": {
+      "background": "skyline.render"
     }
   }
 ]
