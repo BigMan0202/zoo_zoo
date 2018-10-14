@@ -170,8 +170,8 @@
           rotation: -19 / 360 * Math.PI * 2,
           texture: this.inputs.m,
         }, {
-          x: 0 + 960 * 0,
-          y: 0 + 535 * 0,
+          x: 960,
+          y: 540,
           rotation: -90 / 360 * Math.PI * 2,
           texture: this.inputs.n,
         }, {
