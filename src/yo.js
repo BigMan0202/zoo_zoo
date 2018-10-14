@@ -1,5 +1,7 @@
 (function(global) {
 
+    const F = (frame, from, delta) => (frame - FRAME_FOR_BEAN(from)) / (FRAME_FOR_BEAN(from + delta) - FRAME_FOR_BEAN(from));
+
 
   function rotatePoint(point, angle, pivot) {
     s = Math.sin(angle);
@@ -62,12 +64,19 @@
         },
       });
 
-      this.title = document.createElement('img');
-      Loader.load('res/title.png', this.title, () => null);
+      this.title = Loader.loadTexture('res/title.png');
+      this.titleMesh = new THREE.Mesh(
+        new THREE.PlaneBufferGeometry(1920, 1080),
+        new THREE.MeshBasicMaterial({
+          map: this.title,
+          transparent: true,
+        }));
+      this.titleMesh.rotation.y = Math.PI;
+      this.scene.add(this.titleMesh);
 
       this.scenes = [{
-          x: 1666,
-          y: 527,
+          x: 0,
+          y: 0,
           rotation: 0,
           texture: this.inputs.a,
         }, {
@@ -265,7 +274,7 @@
         scene.container.visible = false;
       }
 
-      this.progress = frame / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.progress = Math.max(frame - 368, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
       const currentScene = this.scenes[this.progress | 0];
       currentScene.texture.enabled = true;
       currentScene.container.visible = true;
@@ -278,6 +287,9 @@
     }
 
     update(frame) {
+      if(!this.progress) {
+        return;
+      }
       this.currentScene = this.scenes[(this.progress) | 0];
       this.nextScene = this.scenes[(this.progress + 1) | 0];
       const t = Math.max((this.progress - 1) / (this.scenes.length - 1), 0);
@@ -291,6 +303,17 @@
       this.camera.position.z = point.z - 999.9;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
+
+      this.titleMesh.position.x = this.camera.position.x;
+      this.titleMesh.position.y = this.camera.position.y;
+      this.titleMesh.position.z = this.camera.position.z + 1;
+      this.titleMesh.rotation.z = Math.PI + this.camera.rotation.z;
+      const titleScaler = easeIn(1, 4, F(frame, 360, 24));
+      this.titleMesh.position.x += easeIn(0, 1500, F(frame, 360, 24));
+      this.titleMesh.position.y += easeIn(0, -200, F(frame, 360, 24));
+      this.titleMesh.scale.set(titleScaler, titleScaler, 1);
+
+      this.titleMesh.visible = BEAN < 384;
 
       const currentScale = Math.exp(Math.log(4) * (this.progress % 1));
       this.currentScene.container.scale.set(currentScale, currentScale, 1);

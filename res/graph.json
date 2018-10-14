@@ -36,7 +36,7 @@
       "h5": "radio.render",
       "h6": "tvforest.render",
       "i": "tvboy.render",
-      "j": "seamonster.render",
+      "j": "reflections.render",
       "k": "octo.render",
       "l": "dragonshrimp.render",
       "m": "eyes.render",
@@ -182,10 +182,20 @@
     "id": "liquid",
     "type": "liquid",
     "connected": {
-        "rotation": "yo.rotation",
-        "zoom": "yo.rotation",
-        "x": "yo.x",
-        "y": "yo.y"
+      "rotation": "yo.rotation",
+      "zoom": "yo.rotation",
+      "x": "yo.x",
+      "y": "yo.y"
+    }
+  },
+  {
+    "id": "reflections",
+    "type": "reflectionsNode",
+    "options": {
+      "shader": "reflections"
+    },
+    "connected": {
+      "background": "seamonster.render"
     }
   }
 ]
