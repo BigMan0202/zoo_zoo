@@ -20,8 +20,8 @@
       this.tooth6 = document.createElement('img');
       Loader.load('res/tooth6.png', this.tooth6, () => null);
 
-      this.startAni1 = 830;
-      this.startAni2 = 942;
+      this.startAni1 = 1230;
+      this.startAni2 = 1342;
     }
 
     render() {
