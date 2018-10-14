@@ -16,7 +16,7 @@
       const grey = '#909090';
       this.ctx.fillStyle = grey;
 
-      const open = easeIn(0, 1, (this.frame - 5120) / 25);
+      const open = easeIn(0, 1, (this.frame - 5485) / 25);
       const bottomOpen = lerp(45, 0, open * 2);
       const topOpen = lerp(1, 0, open * 2 - 1);
 
@@ -55,7 +55,7 @@
 
       this.ctx.save();
       this.ctx.translate(931, 911);
-      this.ctx.rotate(smoothstep(-.2, .1, (this.frame - 5130) / 55));
+      this.ctx.rotate(smoothstep(-.2, .1, (this.frame - 5495) / 55));
       this.ctx.drawImage(
         this.imageElement,
         718, 802,
@@ -67,7 +67,7 @@
 
       this.ctx.save();
       this.ctx.translate(990, 911);
-      this.ctx.rotate(smoothstep(.2, -.1, (this.frame - 5130) / 55));
+      this.ctx.rotate(smoothstep(.2, -.1, (this.frame - 5495) / 55));
       this.ctx.drawImage(
         this.imageElement,
         1000, 802,
