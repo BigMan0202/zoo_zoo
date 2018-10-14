@@ -51,14 +51,14 @@
       this.ctx.fill();
 
       // Floating screaming tv boy
-      const floatingT = (this.frame - 4950) / 400;
+      const floatingT = (this.frame - 4950) / 200;
       this.ctx.fillStyle = grey;
       this.ctx.fillRect(248, 384, 152, 216);
       this.ctx.drawImage(
         this.imageElement,
         248, 384,
         152, 216,
-        easeIn(248, 380, floatingT), easeIn(384, 400, floatingT),
+        smoothstep(248, 290, floatingT), smoothstep(384, 391, floatingT),
         152, 216
       );
       //
@@ -73,6 +73,22 @@
         lerp(935, 933, eatingT), lerp(912, 904, eatingT),
         178, 84
       );
+
+      // Pointy ear tv
+      // 617, 872
+      // 56, 60
+      this.ctx.save();
+      this.ctx.fillRect(617, 882, 56, 50);
+      this.ctx.translate(617, 872);
+      this.ctx.rotate(lerp(0, .18 * Math.sin(this.frame / 15), (this.frame - 4900) / 60));
+      this.ctx.drawImage(
+        this.imageElement,
+        617, 872,
+        56, 60,
+        0, 0,
+        56, 60
+      );
+      this.ctx.restore();
       //
 
       const eyePosPerHalfBar = {
