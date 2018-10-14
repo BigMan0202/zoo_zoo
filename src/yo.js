@@ -299,6 +299,18 @@
       if(!this.progress) {
         return;
       }
+
+      for(let i = 0; i < this.scenes.length; i++) {
+        const scene = this.scenes[i];
+        if((this.progress | 0) <= i - 1) {
+          scene.container.scale.set(1, 1, 1);
+          scene.mesh.scale.set(0.25, 0.25, 1);
+        } else {
+          scene.container.scale.set(4, 4, 1);
+          scene.mesh.scale.set(1, 1, 1);
+        }
+      }
+
       this.currentScene = this.scenes[(this.progress) | 0];
       this.nextScene = this.scenes[(this.progress + 1) | 0];
       const t = Math.max((this.progress - 1) / (this.scenes.length - 1), 0);
@@ -328,8 +340,10 @@
 
       const currentScale = Math.exp(Math.log(4) * (this.progress % 1));
       this.currentScene.container.scale.set(currentScale, currentScale, 1);
+      console.log('curr', currentScale);
       const nextScale = Math.exp(Math.log(0.25) * (1 - (this.progress % 1)));
       this.nextScene.mesh.scale.set(nextScale, nextScale, 1);
+      console.log('net', nextScale);
 
 
       if(this.currentScene.texture.getValue()) {
