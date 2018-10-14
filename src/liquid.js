@@ -55,21 +55,6 @@
         }
       });
 
-      const sprite = document.createElement('canvas');
-      this.sprite = sprite;
-      sprite.width = H * 4;
-      sprite.height = H * 4;
-      const spriteCtx = sprite.getContext('2d');
-      spriteCtx.fillRect(0, 0, sprite.width, sprite.height);
-      spriteCtx.beginPath();
-      spriteCtx.ellipse(sprite.width / 2, sprite.height / 2, sprite.width / 2, sprite.height / 2, 0, 0, Math.PI * 2, false);
-
-      const gradient = spriteCtx.createRadialGradient(sprite.width / 2, sprite.height / 2, 0, sprite.width / 2, sprite.height / 2, sprite.width / 2);
-      gradient.addColorStop(0, 'white');
-      gradient.addColorStop(1, 'black');
-      spriteCtx.fillStyle = gradient;
-      spriteCtx.fill();
-
       this.particles = [];
 
       for(let i = 0; i < 35; i++) {
@@ -88,6 +73,24 @@
       this.output.minFilter = THREE.LinearFilter;
       this.output.magFilter = THREE.LinearFilter;
       this.outputs.render.setValue(this.texture);
+    }
+
+
+    makeSprite() {
+      const sprite = document.createElement('canvas');
+      this.sprite = sprite;
+      sprite.width = H * 4;
+      sprite.height = H * 4;
+      const spriteCtx = sprite.getContext('2d');
+      spriteCtx.fillRect(0, 0, sprite.width, sprite.height);
+      spriteCtx.beginPath();
+      spriteCtx.ellipse(sprite.width / 2, sprite.height / 2, sprite.width / 2, sprite.height / 2, 0, 0, Math.PI * 2, false);
+
+      const gradient = spriteCtx.createRadialGradient(sprite.width / 2, sprite.height / 2, 0, sprite.width / 2, sprite.height / 2, sprite.width / 2);
+      gradient.addColorStop(0, 'white');
+      gradient.addColorStop(1, 'black');
+      spriteCtx.fillStyle = gradient;
+      spriteCtx.fill();
     }
 
     integrate() {
@@ -167,20 +170,84 @@
     }
 
     update(frame) {
-      /*
+      return;
       super.update(frame);
       this.frame = frame;
 
-      for(let i = 0; i < ITERATIONS / 4; i++) {
-        this.computeDensityPressure();
-        this.computeForces();
-        this.integrate();
-      }
-      */
+      this.computeDensityPressure();
+      this.computeForces();
+      this.integrate();
+
+      this.computeDensityPressure();
+      this.computeForces();
+      this.integrate();
+
+      this.computeDensityPressure();
+      this.computeForces();
+      this.integrate();
     }
 
     render() {
       return;
+      this.ctx.save();
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      this.ctx.globalAlpha = 1;
+      this.ctx.fillStyle = 'white';
+      this.ctx.strokeStyle = 'white';
+
+      const rotation = this.inputs.rotation.getValue();
+      const zoom = this.inputs.zoom.getValue();
+      const x = this.inputs.x.getValue();
+      const y = this.inputs.y.getValue();
+      const progress = (this.frame - FRAME_FOR_BEAN(960)) /
+          (FRAME_FOR_BEAN(1152) - FRAME_FOR_BEAN(960));
+
+      const scaler = 0.47 * Math.exp(
+        Math.log(4) * lerp(0, 1, progress));
+
+
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width / 1920);
+
+
+      const xyo = 563.14 + lerp(440, 0, progress);
+      const yyo = 607.6 + lerp(-590, 0, progress);
+      this.ctx.translate(xyo, yyo);
+      this.ctx.scale(scaler, scaler);
+      this.ctx.rotate(rotation + 0.1);
+      this.ctx.fillRect(-5, -5, 10, 10);
+
+      this.ctx.fillStyle = 'white';
+      this.ctx.translate(-xyo, -yyo);
+
+
+      this.ctx.fillStyle = 'black';
+      this.ctx.strokeRect(0, 0, 1920, 1080);
+      /*
+      this.ctx.fillRect(0, 0, 1920, 1080);
+      */
+
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(-10, -10, 10, 10);
+
+      this.ctx.globalAlpha = 0.1;
+      this.ctx.globalCompositeOperation = 'lighter';
+      this.ctx.translate(650, 300);
+      this.ctx.scale(0.2, 0.2);
+      for(const p of this.particles) {
+        this.ctx.save();
+        this.ctx.translate(p.positionX, p.positionY);
+        this.ctx.scale(2, 2);
+        this.ctx.drawImage(
+          this.sprite,
+          -this.sprite.width / 2,
+          -this.sprite.height / 2);
+        this.ctx.restore();
+      }
+
+      this.ctx.restore();
+
+      /*
       this.ctx.globalAlpha = 0.1;
       this.ctx.globalCompositeOperation = 'source-over';
       this.ctx.fillStyle = 'black';
@@ -190,21 +257,15 @@
       const size = H;
       this.ctx.save();
       this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-      this.ctx.scale(0.1, 0.1);
-      const rotation = this.inputs.rotation.getValue();
-      const zoom = this.inputs.zoom.getValue();
-      const x = this.inputs.x.getValue();
-      const y = this.inputs.y.getValue();
-      this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+      this.ctx.scale(scaler, scaler);
+      this.ctx.translate(600, 500);
       this.ctx.rotate(rotation);
-      for(const p of this.particles) {
-        this.ctx.drawImage(
-          this.sprite,
-          p.positionX + this.sprite.width / 2,
-          p.positionY + this.sprite.height / 2);
-
-      }
+      this.ctx.globalAlpha = 1;
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillRect(0, 0, this.canvas.width / 2, this.canvas.height / 2);
+      this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
       this.ctx.restore();
+      */
 
       this.output.needsUpdate = true;
       this.outputs.render.setValue(this.output);
@@ -213,6 +274,8 @@
     resize() {
       this.canvas.width = 16 * GU;
       this.canvas.height = 9 * GU;
+
+      this.makeSprite();
     }
   }
 
