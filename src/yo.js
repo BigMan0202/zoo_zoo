@@ -232,7 +232,7 @@
 
         const mesh = new THREE.Mesh(
           geometry,
-          new THREE.MeshBasicMaterial({map: scene.texture.getValue()}));
+          new THREE.MeshBasicMaterial({map: scene.texture.getValue(), transparent: true}));
         const rotated = rotatePoint({x: x, y: y}, -accumulatedPreviousRotation, {x: 0, y: 0});
         mesh.position.x = rotated.x;
         mesh.position.y = rotated.y;
@@ -283,7 +283,11 @@
         scene.container.visible = false;
       }
 
-      this.progress = Math.max(frame - 368, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.progress = Math.max(frame - 737, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.progress += easeIn(0, 0.25, F(frame, 384 - 48, 48 * 5));
+
+      this.progress += easeIn(0, 0.5 + 1.75, F(frame, 576 - 48 * 3, 48 * 3));
+
       const currentScene = this.scenes[this.progress | 0];
       currentScene.texture.enabled = true;
       currentScene.container.visible = true;

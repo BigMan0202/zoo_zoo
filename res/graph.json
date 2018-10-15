@@ -23,7 +23,7 @@
     "connected": {
       "a": "title.render",
       "b": "starsky.render",
-      "c": "church.render",
+      "c": "starsky2.render",
       "d": "nuns.render",
       "e": "face.render",
       "f": "teeth.render",
@@ -205,6 +205,16 @@
     },
     "connected": {
       "background": "skyline.render"
+    }
+  },
+  {
+    "id": "starsky2",
+    "type": "starsky2Node",
+    "options": {
+      "shader": "starsky2"
+    },
+    "connected": {
+      "background": "church.render"
     }
   }
 ]
