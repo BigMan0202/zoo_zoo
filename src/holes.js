@@ -22,7 +22,7 @@
       super.update(frame);
       this.frame = frame;
 
-      const tStart = (frame - 4061) / 60;
+      const tStart = (frame - 3507) / 60;
 
       this.flyPosition1 = {
         x: 215 + lerp(0, Math.sin(frame / 20) * 10, tStart) + 255/2,

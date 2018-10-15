@@ -17,7 +17,7 @@
       this.ctx.fillStyle = grey;
 
       // TVBoy eyes
-      const open = easeIn(0, 1, (this.frame - 5485) / 25);
+      const open = easeIn(0, 1, (this.frame - 4890) / 25);
       const bottomOpen = lerp(45, 0, open * 2);
       const topOpen = lerp(1, 0, open * 2 - 1);
 
@@ -56,9 +56,9 @@
       this.ctx.fillRect(718, 802, 200, 146);
       this.ctx.fillRect(1010, 802, 250, 146);
 
-      const tArms = this.frame < 5400
-        ? 2/3 - (this.frame - 5168) / 200
-        : (this.frame - 5495) / 55;
+      const tArms = this.frame < 4840
+        ? 2/3 - (this.frame - 4615) / 200
+        : (this.frame - 4900) / 55;
 
       this.ctx.save();
       this.ctx.translate(931, 911);

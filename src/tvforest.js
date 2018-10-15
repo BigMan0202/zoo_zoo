@@ -51,7 +51,7 @@
       this.ctx.fill();
 
       // Floating screaming tv boy
-      const floatingT = (this.frame - 4950) / 200;
+      const floatingT = (this.frame - 4265) / 200;
       this.ctx.fillStyle = grey;
       this.ctx.fillRect(248, 384, 152, 216);
       this.ctx.drawImage(
@@ -64,7 +64,7 @@
       //
 
       // Eating TV
-      const eatingT = lerp(0, (Math.sin(this.frame / 10) + 1) / 2, (this.frame - 4900) / 20);
+      const eatingT = lerp(0, (Math.sin(this.frame / 10) + 1) / 2, (this.frame - 4245) / 20);
       this.ctx.fillRect(935, 912, 178, 84);
       this.ctx.drawImage(
         this.imageElement,
@@ -80,7 +80,7 @@
       this.ctx.save();
       this.ctx.fillRect(617, 882, 56, 50);
       this.ctx.translate(617, 872);
-      this.ctx.rotate(lerp(0, .18 * Math.sin(this.frame / 15), (this.frame - 4900) / 60));
+      this.ctx.rotate(lerp(0, .18 * Math.sin(this.frame / 15), (this.frame - 4245) / 60));
       this.ctx.drawImage(
         this.imageElement,
         617, 872,
@@ -116,30 +116,29 @@
 
       // 1496 x 195
 
-      if (BEAN >= 2358) {
-        // start eye blink
-        this.ctx.fillStyle = grey;
-        const closeEye = this.frame < 4890
-          ? easeOut(0, 1, (this.frame - 4875) / 10)
-          : easeIn(1, 0, (this.frame - 4890) / 10);
-        this.ctx.beginPath();
-        this.ctx.ellipse(1496 + (90 * closeEye),
-                          160,
-                          20 + (100 * closeEye),
-                          35 + (17 * closeEye),
-                          0,
-                          Math.PI / 2,(3* Math.PI )/ 2);
-        this.ctx.fill();
-        this.ctx.beginPath();
-        this.ctx.ellipse( 1658 - (90 * closeEye),
-                          164,
-                          20 + (100 * closeEye),
-                          35 + (19 * closeEye),
-                          0,
-                          -Math.PI/2,
-                          Math.PI/2);
-        this.ctx.fill();
-      }
+      // start eye blink
+      this.ctx.fillStyle = grey;
+      const closeEye = this.frame < 4300
+        ? easeOut(0, 1, (this.frame - 4285) / 10)
+        : easeIn(1, 0, (this.frame - 4300) / 10);
+      this.ctx.beginPath();
+      this.ctx.ellipse(1496 + (90 * closeEye),
+                        160,
+                        20 + (100 * closeEye),
+                        35 + (17 * closeEye),
+                        0,
+                        Math.PI / 2,(3* Math.PI )/ 2);
+      this.ctx.fill();
+      this.ctx.beginPath();
+      this.ctx.ellipse( 1658 - (90 * closeEye),
+                        164,
+                        20 + (100 * closeEye),
+                        35 + (19 * closeEye),
+                        0,
+                        -Math.PI/2,
+                        Math.PI/2);
+      this.ctx.fill();
+
       this.ctx.restore();
     }
 
