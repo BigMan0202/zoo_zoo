@@ -3,14 +3,7 @@
     "id": "root",
     "type": "NIN.RootNode",
     "connected": {
-      "screen": "sceneSwitcherNode.render"
-    }
-  },
-  {
-    "id": "sceneSwitcherNode",
-    "type": "SceneSwitcherNode",
-    "connected": {
-      "A": "bgpattern.render"
+      "screen": "blurscope.render"
     }
   },
   {
@@ -215,6 +208,39 @@
     },
     "connected": {
       "background": "church.render"
+    }
+  },
+  {
+    "id": "blurX",
+    "type": "BlurPassNode",
+    "options": {
+      "direction": "x"
+    },
+    "connected": {
+      "tDiffuse": "blurY.render"
+    }
+  },
+  {
+    "id": "blurY",
+    "type": "BlurPassNode",
+    "options": {
+      "direction": "Y"
+    },
+    "connected": {
+      "tDiffuse": "bgpattern.render"
+    }
+  },
+  {
+    "id": "blurscope",
+    "type": "blurscopeNode",
+    "options": {
+      "shader": "blurscope"
+    },
+    "connected": {
+      "blurred": "blurX.render",
+      "original": "bgpattern.render",
+      "x": "yo.x",
+      "y": "yo.y"
     }
   }
 ]
