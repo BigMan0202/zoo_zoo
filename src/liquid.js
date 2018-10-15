@@ -193,6 +193,7 @@
       super.update(frame);
       this.frame = frame;
 
+      /*
       this.computeDensityPressure();
       this.computeForces();
       this.integrate();
@@ -204,6 +205,7 @@
       this.computeDensityPressure();
       this.computeForces();
       this.integrate();
+      */
 
       this.uniforms.frame.value = frame;
       this.uniforms.bg.value = this.inputs.bg.getValue();
@@ -218,6 +220,7 @@
 
       renderer.render(this.scene, this.camera, this.renderTarget, true);
       this.outputs.render.setValue(this.renderTarget.texture);
+      return;
 
       this.ctx.save();
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
