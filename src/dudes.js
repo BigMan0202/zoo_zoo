@@ -9,7 +9,7 @@
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
 
-      const handT = lerp(0, 1, (this.frame - 7015) / 500);
+      const handT = lerp(0, 1, (this.frame - 6461) / 500);
       const saddle = '#522e22';
       this.ctx.fillStyle = saddle;
       this.ctx.fillRect(880, 91, 430, 213);

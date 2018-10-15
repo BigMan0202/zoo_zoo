@@ -16,7 +16,7 @@
 
       this.ctx.save();
       this.ctx.translate(1005.5, 800);
-      const t = smoothstep(0, 1, (this.frame - 2215) / 700);
+      const t = smoothstep(0, 1, (this.frame - 1663) / 700);
       this.ctx.rotate(t * 0.2);
       const yOffset = (Math.sin(t * 30 - Math.PI / 2) + 1) * 95;
       this.ctx.drawImage(
@@ -38,8 +38,8 @@
       // top left: 1525, 47
       // size: 266, 292
       const rotation = easeIn(0,
-                              easeOut(-.5, 0, (this.frame - 2455) / 150),
-                              (this.frame - 2355) / 100);
+                              easeOut(-.5, 0, (this.frame - 1903) / 150),
+                              (this.frame - 1803) / 100);
       this.ctx.rotate(rotation);
       this.ctx.drawImage(
         this.imageElement,
@@ -62,7 +62,7 @@
 
       this.ctx.save();
       this.ctx.translate(1220, 180);
-      const localT = smoothstep(0, 1, (this.frame - 2215) / 700);
+      const localT = smoothstep(0, 1, (this.frame - 1663) / 700);
       const y2Offset = (Math.sin(localT * 30 - Math.PI / 2) + 1) * 42 - 5;
       this.ctx.drawImage(
         this.imageElement,
@@ -77,7 +77,7 @@
       // Multi eye guy
       // Top left: 1419, 424
       // Size: 252, 266
-      const multiEyeT = (this.frame - 2455) / 100;
+      const multiEyeT = (this.frame - 1903) / 100;
       this.ctx.fillRect(1419, 424, 252, 266);
       this.ctx.drawImage(
         this.imageElement,

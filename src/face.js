@@ -20,9 +20,9 @@
       this.tooth6 = document.createElement('img');
       Loader.load('res/tooth6.png', this.tooth6, () => null);
 
-      this.startAni1 = 1407;
-      this.startAni2 = 1526;
-      this.startAni3 = 1614;
+      this.startAni1 = 1007;
+      this.startAni2 = 1126;
+      this.startAni3 = 1214;
     }
 
     render() {
@@ -45,8 +45,7 @@
       const tooth6X = tooth1X + 25;
       const tooth6Y = tooth1Y + 16;
 
-      // first bean 459
-      if (BEAN <= 780){
+      if (BEAN <= 550){
         if (this.frame >= this.startAni1)
           this.ctx.drawImage(this.tooth1, tooth1X, tooth1Y);
         if (this.frame >= this.startAni1 + 10)
@@ -59,7 +58,7 @@
           this.ctx.drawImage(this.tooth5, tooth5X, tooth5Y);
         if (this.frame >= this.startAni1 + 50)
           this.ctx.drawImage(this.tooth6, tooth6X, tooth6Y);
-      } else if (BEAN < 832) {
+      } else if (BEAN < 590) {
         if (this.frame <= this.startAni2 + 50)
           this.ctx.drawImage(this.tooth1, tooth1X, tooth1Y);
         if (this.frame <= this.startAni2 + 40)
