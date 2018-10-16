@@ -84,6 +84,11 @@
       this.scene.add(this.titleMesh);
 
       this.scenes = [{
+          x: 960,
+          y: 540,
+          rotation: 0,
+          texture: this.inputs.pre8,
+        }, {
           x: 1616,
           y: 184,
           rotation: 4.36 / 360 * Math.PI * 2,
@@ -327,21 +332,21 @@
       }
 
       this.progress = Math.max(frame - 737, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
-      this.progress += 8;
+      this.progress += 9;
       this.progress += easeIn(0, 0.25, F(frame, 384 - 48, 48 * 5));
 
       this.progress += easeIn(0, 0.5 + 1.75, F(frame, 576 - 48 * 3, 48 * 3));
       
-      this.progress = Math.min(31.999, this.progress);
+      this.progress = Math.min(32.999, this.progress);
 
-      this.progress = smoothstep(this.progress, 9, F(frame, 4800, 192)); 
+      this.progress = smoothstep(this.progress, 10, F(frame, 4800, 192)); 
 
       if(BEAN >= 5088) {
-        this.progress = 8 - (frame - 9784) / 60 / 60 * PROJECT.music.bpm / 4 / 2;
+        this.progress = 9 - (frame - 9784) / 60 / 60 * PROJECT.music.bpm / 4 / 2;
       }
 
-      if(this.progress < 0) {
-        this.progress = 0;
+      if(this.progress < 1) {
+        this.progress = 1;
       }
 
 
