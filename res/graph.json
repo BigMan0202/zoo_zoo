@@ -17,8 +17,8 @@
       "a": "title.render",
       "b": "starsky.render",
       "c": "starsky2.render",
-      "d": "nuns.render",
-      "e": "face.render",
+      "d": "outernunburst.render",
+      "e": "nunburst.render",
       "f": "teeth.render",
       "g": "liquid.render",
       "h": "snakecharmer.render",
@@ -241,6 +241,28 @@
       "original": "bgpattern.render",
       "x": "yo.x",
       "y": "yo.y"
+    }
+  },
+  {
+    "id": "outernunburst",
+    "type": "nunburstNode",
+    "options": {
+      "shader": "nunburst"
+    },
+    "connected": {
+      "background": "nuns.render"
+    }
+  },
+  {
+    "id": "nunburst",
+    "type": "nunburstNode",
+    "options": {
+      "shader": "nunburst",
+        "x": 829,
+        "y": 600
+    },
+    "connected": {
+      "background": "face.render"
     }
   }
 ]

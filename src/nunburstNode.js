@@ -1,10 +1,14 @@
 (function (global) {
-  class starsky2Node extends NIN.ShaderNode {
+  class nunburstNode extends NIN.ShaderNode {
     constructor(id, options) {
       options.inputs = {
+        overlay: new NIN.TextureInput(),
         background: new NIN.TextureInput(),
       };
       super(id, options);
+      this.x = (options.x - 960) || 0;
+      this.y = (options.y - 540) || 0;
+
       this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
@@ -15,8 +19,10 @@
     update(frame) {
       this.uniforms.frame.value = frame;
       this.uniforms.background.value = this.inputs.background.getValue();
+      this.uniforms.x.value = this.x / 1920;
+      this.uniforms.y.value = this.y / 1080;
     }
   }
 
-  global.starsky2Node = starsky2Node;
+  global.nunburstNode = nunburstNode;
 })(this);

@@ -20,19 +20,26 @@
       }
       this.zoomThrob *= 0.95;
       if(BEAT) {
+        if(BEAN >= 576) {
+          if(BEAN % 48 == 24) {
+              this.zoomThrob = 5;
+          }
+        }
+
         switch(BEAN) {
           case 192:
           case 288:
           case 372:
           case 384:
             this.zoomThrob = 1;
+            break;
+          case 2640:
+          case 2640 + 8:
+          case 2640 + 24 - 4:
+          case 2640 + 48:
+            this.zoomThrob = 15;
         }
 
-        if(BEAN >= 576) {
-          if(BEAN % 48 == 24) {
-              this.zoomThrob = 5;
-          }
-        }
         /*
         if(BEAN >= 576) {
           switch(BEAN % (96 * 2)) {

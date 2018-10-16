@@ -12,7 +12,7 @@ void main() {
 
   vec3 brown = vec3(82., 46., 34.) / 255.;
 
-  float size = mix(4.5, 1.5, pow(clamp((frame - 1061.) / (1107. - 1061.), 0., 1.), 3.));
+  float size = mix(4.5, 1.5, pow(clamp((frame - 1014.) / (1107. - 1014.), 0., 1.), 3.));
   float ringWidth = 0.075;
   float whitefrost = 0.5;
   vec3 yellow = vec3(238., 221., 165.) / 255.;
@@ -22,6 +22,7 @@ void main() {
   vec3 frostcolor = gray;
 
   vec2 uv = vUv * vec2(16./9., 1.) - vec2(.5 / 9. * 16., .5) + vec2(-x, y) / 960.;
+
   uv *= 1.44 * 2.;
   float len = sqrt(uv.x * uv.x + uv.y * uv.y);
   vec2 uv2 = uv -= 0.5 * vec2(.1, -0.03);
