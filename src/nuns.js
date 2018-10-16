@@ -22,9 +22,16 @@
 
       this.startAni1 = 1230;
       this.startAni2 = 1342;
+
+      this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBAFormat
+      });
     }
 
     render() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       super.render();
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);

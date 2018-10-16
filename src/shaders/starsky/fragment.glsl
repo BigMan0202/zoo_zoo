@@ -8,7 +8,7 @@ varying vec2 vUv;
 
 float starsky(vec2 uv) {
     uv *= 200.;
-    return max(0., sin(uv.x) * sin(uv.y) * 10. - 9.) + 0.2;
+    return max(0., sin(uv.x) * sin(uv.y) * 10. - 9.) + sin(uv.y / 200. + 1.8) * 0.5;
 }
 
 void main() {
@@ -22,11 +22,12 @@ void main() {
                 coords.x * sin(angle) + coords.y * cos(angle));
   float stars = starsky(coords);
 
-  color = 
-  mix(
-      color,
-      mix(color, color * stars, step(color.b, 0.9)),
-      smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
+  vec3 yellow = vec3(238., 221., 165.) / 255.;
+
+  color = mix(
+      mix(color, yellow * stars, 1. - background.a),
+      mix(color, yellow, 1. - background.a),
+      1. - smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
   
   gl_FragColor = vec4(color, 1.);
 }

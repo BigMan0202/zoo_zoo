@@ -5,6 +5,11 @@
         background: new NIN.TextureInput(),
       };
       super(id, options);
+      this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
+        minFilter: THREE.LinearFilter,
+        magFilter: THREE.LinearFilter,
+        format: THREE.RGBAFormat
+      });
     }
 
     update(frame) {

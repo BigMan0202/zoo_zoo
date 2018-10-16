@@ -7,7 +7,7 @@ varying vec2 vUv;
 
 float starsky(vec2 uv) {
     uv *= 200.;
-    return max(0., sin(uv.x) * sin(uv.y) * 10. - 9.) + 0.2;
+    return max(0., sin(uv.x) * sin(uv.y) * 10. - 9.) + sin(uv.y / 200. + 1.8) * 0.5;
 }
 
 float circle(vec2 p, float r) {
@@ -20,7 +20,7 @@ void main() {
 
   vec3 color = background.rgb;
 
-  vec2 coords = vUv - vec2(0.5);
+  vec2 coords = vUv - .5;
   float angle = -frame / 5000.;
   coords = (coords + 4. * vec2(1666. - 960., -527. + 540.) / vec2(1920., 1080.));
   coords *= 0.25;
@@ -39,7 +39,9 @@ void main() {
   color = 
   mix(
       color,
-      mix(color, color * stars, step(color.b, 0.9)),
+
+      mix(color, yellow * stars, 1. - background.a),
+
       smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
   
   gl_FragColor = vec4(color, 1.);
