@@ -26,6 +26,15 @@
     constructor(id) {
       super(id, {
         inputs: {
+          pre9: new NIN.Input(),
+          pre8: new NIN.Input(),
+          pre7: new NIN.Input(),
+          pre6: new NIN.Input(),
+          pre5: new NIN.Input(),
+          pre4: new NIN.Input(),
+          pre3: new NIN.Input(),
+          pre2: new NIN.Input(),
+          pre1: new NIN.Input(),
           a: new NIN.Input(),
           b: new NIN.Input(),
           c: new NIN.Input(),
@@ -75,6 +84,46 @@
       this.scene.add(this.titleMesh);
 
       this.scenes = [{
+          x: 1616,
+          y: 184,
+          rotation: 4.36 / 360 * Math.PI * 2,
+          texture: this.inputs.pre8,
+        }, {
+          x: 1624,
+          y: 304,
+          rotation: -133.56 / 360 * Math.PI * 2,
+          texture: this.inputs.pre7,
+        }, {
+          x: 344,
+          y: 342,
+          rotation: -60 / 360 * Math.PI * 2,
+          texture: this.inputs.pre6,
+        }, {
+          x: 328,
+          y: 656,
+          rotation: 60 / 360 * Math.PI * 2,
+          texture: this.inputs.pre5,
+        }, {
+          x: 454,
+          y: 494,
+          rotation: 88.19 / 360 * Math.PI * 2,
+          texture: this.inputs.pre4,
+        }, {
+          x: 960,
+          y: 360,
+          rotation: -76.20 / 360 * Math.PI * 2,
+          texture: this.inputs.pre3,
+        }, {
+          x: 840,
+          y: 424,
+          rotation: 165.94 / 360 * Math.PI * 2,
+          texture: this.inputs.pre2,
+        }, {
+          x: 960,
+          y: 540,
+          rotation: 0,
+          texture: this.inputs.pre1,
+        }, {
           x: 0,
           y: 0,
           rotation: 0,
@@ -217,12 +266,8 @@
         accumulatedPreviousRotation += previousScene.rotation;
         let x = (scene.x - 960) || 0;
         let y = (scene.y - 540) || 0;
-        console.log('step', i);
-        console.log('accumulatedPreviousRotation', accumulatedPreviousRotation);
-        console.log('pre-rotation', x, y);
         let temp = rotatePoint({x, y}, -accumulatedPreviousRotation, {x: 0, y: 0});
         //temp = rotatePoint(temp, scene.rotation, {x, y});
-        console.log('post-rotation', temp.x, temp.y);
 
         accumulatedX -= temp.x;
         accumulatedY -= temp.y;
@@ -273,8 +318,6 @@
 
       this.throb = 0;
 
-      console.log(curvePoints);
-
     }
 
     beforeUpdate(frame) {
@@ -284,9 +327,23 @@
       }
 
       this.progress = Math.max(frame - 737, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.progress += 8;
       this.progress += easeIn(0, 0.25, F(frame, 384 - 48, 48 * 5));
 
       this.progress += easeIn(0, 0.5 + 1.75, F(frame, 576 - 48 * 3, 48 * 3));
+      
+      this.progress = Math.min(31.999, this.progress);
+
+      this.progress = smoothstep(this.progress, 9, F(frame, 4800, 192)); 
+
+      if(BEAN >= 5088) {
+        this.progress = 8 - (frame - 9784) / 60 / 60 * PROJECT.music.bpm / 4 / 2;
+      }
+
+      if(this.progress < 0) {
+        this.progress = 0;
+      }
+
 
       const currentScene = this.scenes[this.progress | 0];
       currentScene.texture.enabled = true;
@@ -334,20 +391,22 @@
       this.titleMesh.position.y = this.camera.position.y;
       this.titleMesh.position.z = this.camera.position.z + 1;
       this.titleMesh.rotation.z = Math.PI + this.camera.rotation.z;
-      const titleStep = F(frame, 360 - 48, 24 + 48);
+      let titleStep = lerp(0, 1, F(frame, 360 - 48, 24 + 48));
+      titleStep = smoothstep(titleStep, 0, F(frame, 4992 - 48, 48));
       const titleScaler = easeIn(1, 4, titleStep);
       this.titleMesh.position.x += easeIn(0, 1500, titleStep);
       this.titleMesh.position.y += easeIn(0, -200, titleStep);
       this.titleMesh.scale.set(titleScaler, titleScaler, 1);
 
-      this.titleMesh.visible = BEAN < 384;
+      this.titleMesh.visible = BEAN < 384 || (BEAN >= (4992 - 48));
+      if(BEAN >= 5088) {
+        this.titleMesh.visible = false;
+      }
 
       const currentScale = Math.exp(Math.log(4) * (this.progress % 1));
       this.currentScene.container.scale.set(currentScale, currentScale, 1);
-      console.log('curr', currentScale);
       const nextScale = Math.exp(Math.log(0.25) * (1 - (this.progress % 1)));
       this.nextScene.mesh.scale.set(nextScale, nextScale, 1);
-      console.log('net', nextScale);
 
 
       if(this.currentScene.texture.getValue()) {

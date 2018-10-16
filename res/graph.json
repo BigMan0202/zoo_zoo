@@ -14,6 +14,14 @@
     "id": "yo",
     "type": "yo",
     "connected": {
+      "pre8": "ninjadev.render",
+      "pre7": "woid.render",
+      "pre6": "gfx.render",
+      "pre5": "elcodo.render",
+      "pre4": "music.render",
+      "pre3": "rope.render",
+      "pre2": "graphics.render",
+      "pre1": "code.render",
       "a": "title.render",
       "b": "starsky.render",
       "c": "starsky2.render",
@@ -36,7 +44,7 @@
       "n": "dudes.render",
       "o": "yinyang.render",
       "p": "roses.render",
-      "q": "organiball.render",
+      "q": "yolo.render",
       "r": "coolcat.render",
       "s": "bact.render"
     }
@@ -264,5 +272,41 @@
     "connected": {
       "background": "face.render"
     }
+  },
+  {
+      "id": "code",
+      "type": "code"
+  },
+  {
+      "id": "elcodo",
+      "type": "elcodo"
+  },
+  {
+      "id": "gfx",
+      "type": "gfx"
+  },
+  {
+      "id": "graphics",
+      "type": "graphics"
+  },
+  {
+      "id": "music",
+      "type": "music"
+  },
+  {
+      "id": "ninjadev",
+      "type": "ninjadev"
+  },
+  {
+      "id": "rope",
+      "type": "rope"
+  },
+  {
+      "id": "woid",
+      "type": "woid"
+  },
+  {
+      "id": "yolo",
+      "type": "yolo"
   }
 ]
