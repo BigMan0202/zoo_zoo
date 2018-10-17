@@ -13,8 +13,9 @@ void main() {
   vec3 brown = vec3(82., 46., 34.) / 255.;
 
   float size = mix(4.5, 1.5, pow(clamp((frame - 1014.) / (1107. - 1014.), 0., 1.), 3.));
-  size = mix(size, 4.5, pow(clamp((frame - 9230.) / (9599. - 9230.), 0., 1.), 3.));
-  size = mix(size, 1.5, pow(clamp((frame - 9230.) / (9599. - 9230.), 0., 1.), 3.));
+  size = mix(size, 4.5, pow(clamp((frame - 7707.) / (7753. - 7707.), 0., 1.), 3.));
+  //size = mix(size, 4.5, pow(clamp((frame - 9230.) / (7753. - 9230.), 0., 1.), 3.));
+  //size = mix(size, 1.5, pow(clamp((frame - 9230.) / (9599. - 9230.), 0., 1.), 3.));
   float ringWidth = 0.075;
   float whitefrost = 0.5;
   vec3 yellow = vec3(238., 221., 165.) / 255.;

@@ -7,10 +7,6 @@
     }
   },
   {
-    "id": "SpinningCube",
-    "type": "spinningCube"
-  },
-  {
     "id": "yo",
     "type": "yo",
     "connected": {
@@ -28,7 +24,7 @@
       "d": "outernunburst.render",
       "e": "nunburst.render",
       "f": "teeth.render",
-      "g": "liquid.render",
+      "g": "cocktail.render",
       "h": "snakecharmer.render",
       "h1": "glassring.render",
       "h2": "innerglass.render",
@@ -48,22 +44,6 @@
       "r": "coolcat.render",
       "s": "bact.render"
     }
-  },
-  {
-    "id": "city",
-    "type": "city"
-  },
-  {
-    "id": "sun",
-    "type": "sun"
-  },
-  {
-    "id": "cube",
-    "type": "cube"
-  },
-  {
-    "id": "schmraph",
-    "type": "schmraph"
   },
   {
     "id": "face",
@@ -138,10 +118,6 @@
     "type": "roses"
   },
   {
-    "id": "organiball",
-    "type": "organiball"
-  },
-  {
     "id": "coolcat",
     "type": "coolcat"
   },
@@ -176,16 +152,6 @@
       "zoom": "yo.zoom",
       "x": "yo.x",
       "y": "yo.y"
-    }
-  },
-  {
-    "id": "liquid",
-    "type": "liquid",
-    "connected": {
-      "bg": "cocktail.render"
-    },
-    "options": {
-      "shader": "liquid"
     }
   },
   {

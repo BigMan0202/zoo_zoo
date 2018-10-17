@@ -234,14 +234,14 @@
           rotation: -56.12 / 360 * Math.PI * 2,
           texture: this.inputs.o,
         }, {
-          x: 1548,
-          y: 769,
-          rotation: 19.65 / 360 * Math.PI * 2,
+          x: 1014,
+          y: 505,
+          rotation: 12.86 / 360 * Math.PI * 2,
           texture: this.inputs.p,
         }, {
-          x: 1299,
-          y: 297,
-          rotation: -126.78 / 360 * Math.PI * 2,
+          x: 799.32,
+          y: 629,
+          rotation: -102.12 / 360 * Math.PI * 2,
           texture: this.inputs.q,
         }, {
           x: 635,
