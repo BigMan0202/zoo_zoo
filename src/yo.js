@@ -316,7 +316,7 @@
       this.camera = new THREE.OrthographicCamera(
         -1920 / 2 * cameraZoom, 1920 / 2 * cameraZoom,
         1080 / 2 * cameraZoom, -1080 / 2 * cameraZoom,
-        0.001, 1000000);
+        0.0001, 10000);
 
       this.cameraPath = new THREE.CatmullRomCurve3(curvePoints);
       this.rotationPath = new THREE.SplineCurve(rotationPoints);
@@ -331,7 +331,11 @@
         scene.container.visible = false;
       }
 
-      this.progress = Math.max(frame - 737, 368) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+      this.progress = (Math.max(frame - 737, 368)) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
+
+      /* kludge for accuracy */
+      this.progress *= 1.00001;
+
       this.progress += 9;
       this.progress += easeIn(0, 0.25, F(frame, 384 - 48, 48 * 5));
 
@@ -387,14 +391,14 @@
 
       this.camera.position.x = point.x;
       this.camera.position.y = point.y;
-      this.camera.position.z = point.z - 999.9;
+      this.camera.position.z = point.z - 999.999;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
       window.HACKY_ROTATION_SHARE_SERVICE_DELUXE = this.camera.rotation.z;
 
       this.titleMesh.position.x = this.camera.position.x;
       this.titleMesh.position.y = this.camera.position.y;
-      this.titleMesh.position.z = this.camera.position.z + 1;
+      this.titleMesh.position.z = this.camera.position.z;
       this.titleMesh.rotation.z = Math.PI + this.camera.rotation.z;
       let titleStep = lerp(0, 1, F(frame, 360 - 48, 24 + 48));
       titleStep = smoothstep(titleStep, 0, F(frame, 4992 - 48, 48));

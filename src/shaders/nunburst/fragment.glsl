@@ -28,15 +28,18 @@ void main() {
 
   vec4 bgColor = texture2D(background, vUv);
   vec3 color = bgColor.rgb;
-  if(frame > 1106.5) {
+  float amount = pow(clamp(0., 1., (frame - 1084.) / (1084. - 1084.)), 3.);
+  if(frame > 1060.5) {
+    vec3 sunburstColor = vec3(1., 0., 0.);
     if(x < -0.001) {
-        color = mix(color, sunburst(uv), 1. - bgColor.a);
+        sunburstColor = mix(color, sunburst(uv), 1. - bgColor.a);
     } else {
-        color = mix(color, sunburst(uv), 1. - step(color.r + color.g + color.b, 0.2));
+        sunburstColor = mix(color, sunburst(uv), 1. - step(color.r + color.g + color.b, 0.2));
     }
+    color = mix(color, sunburstColor, amount);
   } else {
       gl_FragColor = vec4(color, bgColor.a);
       return;
   }
-  gl_FragColor = vec4(color, 1.);
+  gl_FragColor = vec4(color, bgColor.a);
 }
