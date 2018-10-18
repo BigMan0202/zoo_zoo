@@ -24,24 +24,14 @@ void main() {
     vec3 black = vec3(0.);
 
     vec3 startColor;
-    if(color.r + color.g + color.b < 0.05 && .25 -vUv.x + vUv.y > 0.5) {
-        startColor = yellow;
-    } else {
+    if(vUv.x > vUv.y - 0.35) {
         startColor = black;
+    } else {
+        startColor = mix(yellow, black, (color.r + color.g + color.b) / 3. * 10.);
     }
 
     color = mix(startColor, color, startTimer2 * startTimer2 * startTimer2 * startTimer2 * startTimer2 * startTimer2 * startTimer2);
     color = mix(vec3(0.), color, startTimer);
-
-    if (frame > 1700. && frame < 2500.) {
-        if (color.r < .15 && color.g < .15 && color.b < .15) {
-            float pos = mix(vUv.x, vUv.y, sin(frame / 60.)) * 10.;
-            float value = floor(fract(pos) + 0.5);
-            color = mix(vec3(0., 0., 0.), vec3(184./255., 13./255., 19./255.), value);
-        }
-    }
-
-    float sizer = 4.;
 
     gl_FragColor = vec4(color, 1.);
 }

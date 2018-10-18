@@ -316,7 +316,7 @@
       this.camera = new THREE.OrthographicCamera(
         -1920 / 2 * cameraZoom, 1920 / 2 * cameraZoom,
         1080 / 2 * cameraZoom, -1080 / 2 * cameraZoom,
-        0.0001, 10000);
+        1, 1001);
 
       this.cameraPath = new THREE.CatmullRomCurve3(curvePoints);
       this.rotationPath = new THREE.SplineCurve(rotationPoints);
@@ -333,20 +333,22 @@
 
       this.progress = (Math.max(frame - 737, 368)) / 60 / 60 * PROJECT.music.bpm / 4 / 4;
 
-      /* kludge for accuracy */
-      this.progress *= 1.00001;
-
       this.progress += 9;
       this.progress += easeIn(0, 0.25, F(frame, 384 - 48, 48 * 5));
 
       this.progress += easeIn(0, 0.5 + 1.75, F(frame, 576 - 48 * 3, 48 * 3));
+
+      this.progress += easeIn(0, 2, F(frame, 4008 - 48, 48));
+      if(BEAN >= 4032) {
+        this.progress -= lerp(0, 1.5, Math.pow(F(frame, 4032, 48 * 4 * 2), 1.1));
+      }
       
       this.progress = Math.min(32.999, this.progress);
 
-      this.progress = smoothstep(this.progress, 10, F(frame, 4800, 192)); 
+      this.progress = smoothstep(this.progress, 10, F(frame, 4800 + 24, 192 + 24)); 
 
-      if(BEAN >= 5088) {
-        this.progress = 9 - (frame - 9784) / 60 / 60 * PROJECT.music.bpm / 4 / 2;
+      if(BEAN >= 5136) {
+        this.progress = 9 - (frame - 9876) / 60 / 60 * PROJECT.music.bpm / 4 / 2;
       }
 
       if(this.progress < 1) {
@@ -391,24 +393,24 @@
 
       this.camera.position.x = point.x;
       this.camera.position.y = point.y;
-      this.camera.position.z = point.z - 999.999;
+      this.camera.position.z = point.z - 1001;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
       window.HACKY_ROTATION_SHARE_SERVICE_DELUXE = this.camera.rotation.z;
 
       this.titleMesh.position.x = this.camera.position.x;
       this.titleMesh.position.y = this.camera.position.y;
-      this.titleMesh.position.z = this.camera.position.z;
+      this.titleMesh.position.z = this.camera.position.z + 1.001;
       this.titleMesh.rotation.z = Math.PI + this.camera.rotation.z;
       let titleStep = lerp(0, 1, F(frame, 360 - 48, 24 + 48));
-      titleStep = smoothstep(titleStep, 0, F(frame, 4992 - 48, 48));
+      titleStep = smoothstep(titleStep, 0, F(frame, 5040 - 48, 48));
       const titleScaler = easeIn(1, 4, titleStep);
       this.titleMesh.position.x += easeIn(0, 1500, titleStep);
       this.titleMesh.position.y += easeIn(0, -200, titleStep);
       this.titleMesh.scale.set(titleScaler, titleScaler, 1);
 
-      this.titleMesh.visible = BEAN < 384 || (BEAN >= (4992 - 48));
-      if(BEAN >= 5088) {
+      this.titleMesh.visible = BEAN < 384 || (BEAN >= (5040 - 48));
+      if(BEAN >= 5136) {
         this.titleMesh.visible = false;
       }
 
