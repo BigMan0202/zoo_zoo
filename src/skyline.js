@@ -16,7 +16,7 @@
     update() {
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
-      this.ctx.globalAlpha = 0.1;
+      this.ctx.globalAlpha = 0.2;
       this.ctx.drawImage(this.imageElement, 0, 0);
       this.ctx.fillStyle = '#eedda5';
       const width = 8;

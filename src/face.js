@@ -31,6 +31,31 @@
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.translate(1920 / 2, 1080 / 2);
 
+      this.ctx.fillStyle = '#522e22';
+      this.ctx.fillRect(-100, -100, 50, 50);
+      this.ctx.fillRect(70, -110, 50, 50);
+      this.ctx.save()
+      this.ctx.translate(-83, -80);
+      this.ctx.fillStyle = '#eedda5';
+      const size = 25;
+      this.ctx.rotate(this.frame / 60);
+      this.ctx.fillRect(-size / 2, -size / 2, size, size);
+      this.ctx.restore();
+      this.ctx.save();
+      this.ctx.translate(87, -89);
+      this.ctx.rotate(this.frame / 60);
+      this.ctx.translate(0, 2.5);
+      this.ctx.fillStyle = '#eedda5';
+      this.ctx.beginPath();
+      for(let i = 0; i < 4; i++) {
+        const angle = i / 3;
+        const x = size / 2 * Math.cos(angle * Math.PI * 2) * 1.41;
+        const y = size / 2 * Math.sin(angle * Math.PI * 2) * 1.41;
+        this.ctx.lineTo(x, y);
+      }
+      this.ctx.fill();
+      this.ctx.restore();
+
 
       const tooth1X = 782;
       const tooth1Y = 73;

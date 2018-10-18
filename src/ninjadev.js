@@ -6,6 +6,7 @@
 
     render(renderer) {
       super.render(renderer);
+      return;
       this.ctx.scale(this.canvas.width / 16, this.canvas.height / 9);
       this.ctx.translate(8, 4.5);
 

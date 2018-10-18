@@ -33,7 +33,7 @@
       "h5": "radio.render",
       "h6": "tvforest.render",
       "i": "tvboy.render",
-      "j": "reflections.render",
+      "j": "seamonster.render",
       "k": "octo.render",
       "l": "dragonshrimp.render",
       "m": "eyes.render",
@@ -152,16 +152,6 @@
       "zoom": "yo.zoom",
       "x": "yo.x",
       "y": "yo.y"
-    }
-  },
-  {
-    "id": "reflections",
-    "type": "reflectionsNode",
-    "options": {
-      "shader": "reflections"
-    },
-    "connected": {
-      "background": "seamonster.render"
     }
   },
   {
