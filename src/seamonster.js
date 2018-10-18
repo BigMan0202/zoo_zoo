@@ -25,7 +25,6 @@
         -283.5, -271.5
       );
       this.ctx.restore();
-
       this.ctx.restore();
     }
 

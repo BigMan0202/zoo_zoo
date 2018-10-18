@@ -18,6 +18,21 @@
       this.uniforms.original.value = this.inputs.original.getValue();
       this.uniforms.x.value = this.inputs.x.getValue();
       this.uniforms.y.value = this.inputs.y.getValue();
+      this.uniforms.rotation.value = frame / 60.;
+      this.uniforms.method.value = 3;
+
+      if(BEAN >= 2976) {
+        this.uniforms.method.value = 0;
+      }
+      if(BEAN >= 2976 + 24 - 4) {
+        this.uniforms.method.value = 1;
+      }
+      if(BEAN >= 2976 + 24 + 12) {
+        this.uniforms.method.value = 2;
+      }
+      if(BEAN >=3072) {
+        this.uniforms.method.value = 3;
+      }
 
       if(BEAN >= 2640 -4  && BEAN < 2640) {
         this.uniforms.x.value -= easeIn(0, 400, F(frame, 2640 - 2, 2));
