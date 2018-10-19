@@ -322,10 +322,10 @@
       this.rotationPath = new THREE.SplineCurve(rotationPoints);
 
       this.throb = 0;
-
     }
 
     beforeUpdate(frame) {
+      CanvasTexturePool.withdrawTextures();
       for (const scene of this.scenes) {
         scene.texture.enabled = false;
         scene.container.visible = false;
@@ -393,7 +393,7 @@
 
       this.camera.position.x = point.x;
       this.camera.position.y = point.y;
-      this.camera.position.z = point.z - 1001;
+      this.camera.position.z = point.z - 999.99;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
       window.HACKY_ROTATION_SHARE_SERVICE_DELUXE = this.camera.rotation.z;
@@ -405,8 +405,8 @@
       let titleStep = lerp(0, 1, F(frame, 360 - 48, 24 + 48));
       titleStep = smoothstep(titleStep, 0, F(frame, 5040 - 48, 48));
       const titleScaler = easeIn(1, 4, titleStep);
-      this.titleMesh.position.x += easeIn(0, 1500, titleStep);
-      this.titleMesh.position.y += easeIn(0, -200, titleStep);
+      this.titleMesh.position.x += easeIn(0, 800, titleStep);
+      this.titleMesh.position.y += easeIn(0, -1000, titleStep);
       this.titleMesh.scale.set(titleScaler, titleScaler, 1);
 
       this.titleMesh.visible = BEAN < 384 || (BEAN >= (5040 - 48));
@@ -419,7 +419,12 @@
       const nextScale = Math.exp(Math.log(0.25) * (1 - (this.progress % 1)));
       this.nextScene.mesh.scale.set(nextScale, nextScale, 1);
 
+      this.outputs.x.setValue(nextPoint.x - point.x);
+      this.outputs.y.setValue(nextPoint.y - point.y);
+      this.outputs.rotation.setValue(this.camera.rotation.z);
+    }
 
+    render(renderer) {
       if(this.currentScene.texture.getValue()) {
         this.currentScene.mesh.material.map = this.currentScene.texture.getValue();
         this.currentScene.mesh.material.needsUpdate = true;
@@ -430,10 +435,12 @@
         this.nextScene.mesh.material.needsUpdate = true;
         this.nextScene.mesh.material.map.needsUpdate = true;
       }
+      super.render(renderer);
+    }
 
-      this.outputs.x.setValue(nextPoint.x - point.x);
-      this.outputs.y.setValue(nextPoint.y - point.y);
-      this.outputs.rotation.setValue(this.camera.rotation.z);
+    resize() {
+      super.resize();
+      CanvasTexturePool.resize();
     }
   }
 

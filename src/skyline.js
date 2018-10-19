@@ -6,11 +6,14 @@
 
     constructor(id) {
       super(id);
-      this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBAFormat
-      });
+      this.texture = CanvasTexturePool._createTexture();
+      this.canvas = this.texture.canvas;
+      this.ctx = this.canvas.getContext('2d');
+    }
+
+    resize() {
+      this.canvas.width = Math.min(16 * GU * 4, 1920);
+      this.canvas.height = Math.min(9 * GU * 4, 1080);
     }
 
     update() {
@@ -18,6 +21,9 @@
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.globalAlpha = 0.2;
       this.ctx.drawImage(this.imageElement, 0, 0);
+      if(BEAN >= 5040) {
+        return;
+      }
       this.ctx.fillStyle = '#eedda5';
       const width = 8;
       this.ctx.globalAlpha = 1;
@@ -46,7 +52,6 @@
         }
         this.ctx.fillStyle = '#eedda5';
 
-        this.ctx.fillRect(1009, 540 - 50, 2, 100);
 
         this.ctx.fillRect(997, 540 - 65, 15, 5);
       }

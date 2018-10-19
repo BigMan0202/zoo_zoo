@@ -28,9 +28,10 @@
       ];
 
       if (BEAT && beans.includes((BEAN - 192) % 384)) {
-        this.throb = 1.08;
+        this.throb = 1;
       } else {
-        this.throb = Math.max(1, this.throb - .007);
+        this.throb *= 0.95;
+        //this.throb = Math.max(1, this.throb - .007);
       }
     }
 
@@ -61,7 +62,7 @@
         this.ctx.drawImage(this.tounge4, 395, 275);
       }
 
-      const scale = this.throb;
+      const scale = 0.85 + this.throb * 0.25;
 
       this.beatRegions = [
         {x: 1173, y: 331, width: 96, height: 103, rotation: -.1},
@@ -75,10 +76,13 @@
         {x: 1352, y: 375, width: 60, height: 55, rotation: -.13},
       ];
 
-      for (const beatRegion of this.beatRegions) {
+      for(let i = 0; i < this.beatRegions.length; i++) {
+        const beatRegion = this.beatRegions[i];
         this.ctx.save();
+        this.ctx.fillStyle = '#522e22';
+        this.ctx.fillRect(beatRegion.x, beatRegion.y, beatRegion.width, beatRegion.height);
         this.ctx.translate(beatRegion.x + beatRegion.width / 2, beatRegion.y + beatRegion.height / 2);
-        this.ctx.rotate(beatRegion.rotation);
+        this.ctx.rotate(beatRegion.rotation - this.frame / 60 * (0.9 + i * 0.5) + i);
         this.ctx.drawImage(
           this.imageElement,
           beatRegion.x, beatRegion.y,

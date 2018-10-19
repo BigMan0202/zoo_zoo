@@ -9,9 +9,9 @@
     }
 
     render() {
+      super.render();
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
-      this.ctx.drawImage(this.imageElement, 0, 0);
 
       // Closed TV boy eyes
       const grey = '#909090';
