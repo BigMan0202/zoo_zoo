@@ -20,6 +20,19 @@
       this.uniforms.y.value = this.inputs.y.getValue();
       this.uniforms.rotation.value = frame / 60.;
       this.uniforms.method.value = 3;
+      this.uniforms.radius.value = 1.5;
+
+      if (BEAN >= 570 && BEAN < 1000) {
+        this.uniforms.x.value += easeOut(300, 0, F(frame, 570, 768));
+        this.uniforms.radius.value = easeOut(1.8, 1.5, F(frame, 570, 768));
+      }
+
+      if (BEAN >= 1044 && BEAN < 1344) {
+        this.uniforms.radius.value = easeIn(
+          1.5,
+          easeIn(2.1, 1.5, F(frame, 1332, 12)),
+          F(frame, 1044, 12));
+      }
 
       if(BEAN >= 2976) {
         this.uniforms.method.value = 0;
@@ -32,6 +45,42 @@
       }
       if(BEAN >=3072) {
         this.uniforms.method.value = 3;
+      }
+
+      if(BEAN >= 1344 && BEAN < 1728) {
+        this.uniforms.method.value = 4;
+      }
+
+      if(BEAN >= 3648) {
+        this.uniforms.method.value = 5;
+      }
+
+      if (BEAN >= 1716) {
+        this.uniforms.radius.value = easeIn(1.5, 1.9, F(frame, 1716, 12));
+      }
+
+      if (BEAN >= 2100) {
+        this.uniforms.radius.value = easeIn(1.9, 1.2, F(frame, 2100, 12));
+      }
+
+      if (BEAN >= 2292) {
+        this.uniforms.radius.value = easeIn(1.2, 1.8, F(frame, 2292, 12));
+      }
+
+      if (BEAN >= 3060) {
+        this.uniforms.radius.value = easeIn(1.8, 1.5, F(frame, 3060, 12));
+      }
+
+      if (BEAN >= 3636) {
+        this.uniforms.radius.value = easeIn(1.5, 3, F(frame, 3636, 12));
+      }
+
+      if (BEAN >= 3648) {
+        this.uniforms.radius.value = easeOut(2.6, 1.2, F(frame, 3648, 12));
+      }
+
+      if (BEAN >= 3840) {
+        this.uniforms.radius.value = smoothstep(1.2, 1.9, F(frame, 3840, 96));
       }
 
       if(BEAN >= 2640 -4  && BEAN < 2640) {

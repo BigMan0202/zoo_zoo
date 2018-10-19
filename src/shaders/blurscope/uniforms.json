@@ -11,5 +11,6 @@
     "x": { "type": "f", "value": 0.0 },
     "y": { "type": "f", "value": 0.0 },
     "rotation": { "type": "f", "value": 0.0 },
-    "method": { "type": "f", "value": 0.0 }
+    "method": { "type": "f", "value": 0.0 },
+    "radius": { "type": "f", "value": 0.0 }
 }
