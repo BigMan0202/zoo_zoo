@@ -18,6 +18,9 @@
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
       this.ctx.globalAlpha = 0.2;
       this.ctx.drawImage(this.imageElement, 0, 0);
+      if(BEAN >= 5040) {
+        return;
+      }
       this.ctx.fillStyle = '#eedda5';
       const width = 8;
       this.ctx.globalAlpha = 1;
@@ -46,7 +49,6 @@
         }
         this.ctx.fillStyle = '#eedda5';
 
-        this.ctx.fillRect(1009, 540 - 50, 2, 100);
 
         this.ctx.fillRect(997, 540 - 65, 15, 5);
       }

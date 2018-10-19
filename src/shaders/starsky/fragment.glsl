@@ -29,10 +29,14 @@ void main() {
 
   vec3 starColor = mix(brown, yellow, stars);
 
+  if(frame < 5000.) {
   color = mix(
       mix(color, starColor, 1. - background.a),
       mix(color, yellow, 1. - background.a),
       1. - smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
+  } else {
+      color = mix(color, yellow, 1. - background.a);
+  }
   
   gl_FragColor = vec4(color, 1.);
 }

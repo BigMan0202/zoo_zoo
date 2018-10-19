@@ -393,7 +393,7 @@
 
       this.camera.position.x = point.x;
       this.camera.position.y = point.y;
-      this.camera.position.z = point.z - 1001;
+      this.camera.position.z = point.z - 999.99;
       this.camera.lookAt(new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z + 1));
       this.camera.rotation.z = Math.PI + rotation;
       window.HACKY_ROTATION_SHARE_SERVICE_DELUXE = this.camera.rotation.z;
@@ -405,8 +405,8 @@
       let titleStep = lerp(0, 1, F(frame, 360 - 48, 24 + 48));
       titleStep = smoothstep(titleStep, 0, F(frame, 5040 - 48, 48));
       const titleScaler = easeIn(1, 4, titleStep);
-      this.titleMesh.position.x += easeIn(0, 1500, titleStep);
-      this.titleMesh.position.y += easeIn(0, -200, titleStep);
+      this.titleMesh.position.x += easeIn(0, 800, titleStep);
+      this.titleMesh.position.y += easeIn(0, -1000, titleStep);
       this.titleMesh.scale.set(titleScaler, titleScaler, 1);
 
       this.titleMesh.visible = BEAN < 384 || (BEAN >= (5040 - 48));
