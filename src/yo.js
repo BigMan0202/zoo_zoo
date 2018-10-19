@@ -219,9 +219,9 @@
           rotation: 0,
           texture: this.inputs.l,
         }, {
-          x: 878 + 230 * 0,
-          y: 400 + 205 * 0,
-          rotation: -19 / 360 * Math.PI * 2,
+          x: 877,
+          y: 400,
+          rotation: -18.65 / 360 * Math.PI * 2,
           texture: this.inputs.m,
         }, {
           x: 960,
