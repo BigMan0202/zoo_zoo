@@ -278,6 +278,20 @@
         accumulatedY -= temp.y;
         const point = new THREE.Vector3(accumulatedX, accumulatedY, -i * 500);
         curvePoints[i] = point;
+        if (scene.texture == this.inputs.h5) {
+          curvePoints[i] = new THREE.Vector3(
+            point.x - 200,
+            point.y - 150,
+            point.z
+          );
+        }
+        if (scene.texture == this.inputs.h6) {
+          curvePoints[i] = new THREE.Vector3(
+            point.x - 50,
+            point.y - 150,
+            point.z
+          );
+        }
         rotationPoints[i] = new THREE.Vector3(accumulatedRotation, accumulatedRotation, accumulatedRotation);
 
         const mesh = new THREE.Mesh(
