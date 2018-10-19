@@ -23,8 +23,6 @@
       Loader.load('res/still.png', this.still, () => null);
       this.logicoma = document.createElement('img');
       Loader.load('res/logicoma.png', this.logicoma, () => null);
-
-      this.beats = [ 7814, 8230, 8742, 9136];
     }
     
     getImageName() {
