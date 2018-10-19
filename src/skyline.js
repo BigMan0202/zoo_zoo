@@ -6,11 +6,14 @@
 
     constructor(id) {
       super(id);
-      this.renderTarget = new THREE.WebGLRenderTarget(640, 360, {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.LinearFilter,
-        format: THREE.RGBAFormat
-      });
+      this.texture = CanvasTexturePool._createTexture();
+      this.canvas = this.texture.canvas;
+      this.ctx = this.canvas.getContext('2d');
+    }
+
+    resize() {
+      this.canvas.width = Math.min(16 * GU * 4, 1920);
+      this.canvas.height = Math.min(9 * GU * 4, 1080);
     }
 
     update() {

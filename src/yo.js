@@ -322,10 +322,10 @@
       this.rotationPath = new THREE.SplineCurve(rotationPoints);
 
       this.throb = 0;
-
     }
 
     beforeUpdate(frame) {
+      CanvasTexturePool.withdrawTextures();
       for (const scene of this.scenes) {
         scene.texture.enabled = false;
         scene.container.visible = false;
@@ -419,7 +419,12 @@
       const nextScale = Math.exp(Math.log(0.25) * (1 - (this.progress % 1)));
       this.nextScene.mesh.scale.set(nextScale, nextScale, 1);
 
+      this.outputs.x.setValue(nextPoint.x - point.x);
+      this.outputs.y.setValue(nextPoint.y - point.y);
+      this.outputs.rotation.setValue(this.camera.rotation.z);
+    }
 
+    render(renderer) {
       if(this.currentScene.texture.getValue()) {
         this.currentScene.mesh.material.map = this.currentScene.texture.getValue();
         this.currentScene.mesh.material.needsUpdate = true;
@@ -430,10 +435,12 @@
         this.nextScene.mesh.material.needsUpdate = true;
         this.nextScene.mesh.material.map.needsUpdate = true;
       }
+      super.render(renderer);
+    }
 
-      this.outputs.x.setValue(nextPoint.x - point.x);
-      this.outputs.y.setValue(nextPoint.y - point.y);
-      this.outputs.rotation.setValue(this.camera.rotation.z);
+    resize() {
+      super.resize();
+      CanvasTexturePool.resize();
     }
   }
 
