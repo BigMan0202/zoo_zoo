@@ -21,6 +21,8 @@
       Loader.load('res/pandacube.png', this.pandacube, () => null);
       this.still = document.createElement('img');
       Loader.load('res/still.png', this.still, () => null);
+      this.logicoma = document.createElement('img');
+      Loader.load('res/logicoma.png', this.logicoma, () => null);
 
       this.beats = [ 7814, 8230, 8742, 9136];
     }
@@ -47,6 +49,11 @@
       const pandacubeY = 401;
       const stillX = 1125;
       const stillY = 657;
+      const logicomaX = 1219;
+      const logicomaY = 535;
+
+      this.ctx.save();
+      this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
 
       if (BEAN > startbean && BEAN < startbean + 48) {
         this.ctx.drawImage(this.altair, altairX, altairY);
@@ -61,6 +68,7 @@
         this.ctx.drawImage(this.cocoon, cocoonX, cocoonY);
       }
       if (BEAN > startbean + 48 * 4 && BEAN < startbean + 48 * 5) {
+        this.ctx.drawImage(this.logicoma, logicomaX, logicomaY);
       }
       if (BEAN > startbean + 48 * 5 && BEAN < startbean + 48 * 6) {
         this.ctx.drawImage(this.desire, desireX, desireY);
@@ -71,6 +79,8 @@
       if (BEAN > startbean + 48 * 7 && BEAN < startbean + 48 * 8) {
         this.ctx.drawImage(this.ephidrena, ephidrenaX, ephidrenaY);
       }
+
+      this.ctx.restore();
     }
 
   }
