@@ -1,35 +1,44 @@
 (function(global) {
   class ninjadev extends ImageNode {
+    constructor(id) {
+      super(id, {
+        outputs: {
+          render: new NIN.Output()
+        }
+      });
+
+      this.nin = document.createElement('img');
+      Loader.load('res/nin.png', this.nin, () => null);
+      this.ja = document.createElement('img');
+      Loader.load('res/ja.png', this.ja, () => null);
+      this.dev = document.createElement('img');
+      Loader.load('res/dev.png', this.dev, () => null);
+    }
     getImageName() {
       return 'res/ninjadev.png';
     }
 
     render(renderer) {
       super.render(renderer);
-      return;
-      this.ctx.scale(this.canvas.width / 16, this.canvas.height / 9);
-      this.ctx.translate(8, 4.5);
+      const startbean = 6000;
+      this.ctx.fillStyle = '#111111';
+      this.ctx.fillRect(385,331,1173,416);
 
-      this.ctx.fillStyle = '#eedda5';
-      this.ctx.font = 'bold 1.5pt Arial';
-      this.ctx.textBaseline = 'middle';
+      const ninX = 400;
+      const ninY = 346;
+      const jaX = 806;
+      const jaY = 346;
+      const devX = 1039;
+      const devY = 346;
 
-      if(BEAN >= 5952) {
-        this.ctx.textAlign = 'right';
-        this.ctx.fillStyle = '#b80d13';
-        this.ctx.fillText('NIN', -1, 0);
+      if (BEAN >= startbean) {
+        this.ctx.drawImage(this.nin, ninX, ninY);
       }
-
-      if(BEAN >= 5952 + 8) {
-        this.ctx.textAlign = 'center';
-        this.ctx.fillStyle = '#eedda5';
-        this.ctx.fillText('JA', 0, 0);
+      if (BEAN >= startbean + 20) {
+        this.ctx.drawImage(this.ja, jaX, jaY);
       }
-
-      if(BEAN >=  5952 + 8 + 8) {
-        this.ctx.textAlign = 'left';
-        this.ctx.fillStyle = '#c1c1c1';
-        this.ctx.fillText('DEV', 1, 0);
+      if (BEAN >= startbean + 20 + 20) {
+        this.ctx.drawImage(this.dev, devX, devY);
       }
     }
   }
