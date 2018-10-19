@@ -69,6 +69,10 @@
         {x: 1216, y: 492, width: 70, height: 70, rotation: .05},
         {x: 1193, y: 206, width: 44, height: 52, rotation: -.08},
         {x: 909, y: 77, width: 67, height: 74, rotation: .03},
+        {x: 1129, y: 14, width: 60, height: 50, rotation: .03},
+        {x: 1321, y: 30, width: 55, height: 61, rotation: .1},
+        {x: 1296, y: 133, width: 55, height: 52, rotation: -.03},
+        {x: 1352, y: 375, width: 60, height: 55, rotation: -.13},
       ];
 
       for (const beatRegion of this.beatRegions) {
