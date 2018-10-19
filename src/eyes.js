@@ -12,9 +12,16 @@
       const handT = lerp(0, 1, (this.frame - 6091) / (6461 - 6091));
       const saddle = '#522e22';
       this.ctx.fillStyle = saddle;
-      this.ctx.fillRect(880, 313, 114, 42);
+      this.ctx.beginPath();
+      this.ctx.moveTo(880, 313);
+      this.ctx.lineTo(993, 299);
+      this.ctx.lineTo(995, 365);
+      this.ctx.lineTo(923, 358);
+      this.ctx.lineTo(874, 335);
+      this.ctx.lineTo(880, 313);
+      this.ctx.fill();
       this.ctx.save();
-      this.ctx.translate(lerp(1015, 981, handT), lerp(280, 301, handT));
+      this.ctx.translate(lerp(1010, 981, handT), lerp(283, 301, handT));
       this.ctx.rotate(lerp(.45, .3, handT));
       this.ctx.drawImage(
         this.imageElement,
