@@ -452,6 +452,11 @@
       super.render(renderer);
     }
 
+    warmup(renderer) {
+      this.update(1000);
+      this.render(renderer);
+    }
+
     resize() {
       super.resize();
       CanvasTexturePool.resize();

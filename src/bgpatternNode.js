@@ -13,6 +13,11 @@
       this.zoomThrob = 0;
     }
 
+    warmup(renderer) {
+      this.update(1000);
+      this.render(renderer);
+    }
+
     update(frame) {
       this.throb *= 0.95;
       if(BEAT && BEAN % 48 == 24) {
