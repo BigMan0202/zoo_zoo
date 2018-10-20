@@ -12,6 +12,11 @@
       });
     }
 
+    warmup(renderer) {
+      this.update(1000);
+      this.render(renderer);
+    }
+
     update(frame) {
       this.uniforms.frame.value = frame;
       this.uniforms.background.value = this.inputs.background.getValue();

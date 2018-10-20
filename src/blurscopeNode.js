@@ -12,6 +12,11 @@
       super(id, options);
     }
 
+    warmup(renderer) {
+      this.update(1000);
+      this.render(renderer);
+    }
+
     update(frame) {
       this.uniforms.frame.value = frame;
       this.uniforms.blurred.value = this.inputs.blurred.getValue();
