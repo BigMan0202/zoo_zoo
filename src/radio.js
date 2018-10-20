@@ -75,6 +75,8 @@
 
       for (const jiggler of this.jigglers) {
         this.ctx.save();
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillRect(jiggler.x, jiggler.y, jiggler.width, jiggler.height);
         this.ctx.translate(jiggler.x + 60, jiggler.y + 60);
         this.ctx.rotate(Math.sin(this.frame * jiggler.speed) * jiggler.amount);
         this.ctx.drawImage(
