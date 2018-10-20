@@ -119,6 +119,14 @@
       if (BEAN >= startbean + 20 + 20) {
         this.ctx.drawImage(this.dev, devX, devY);
       }
+      if (BEAN >= startbean + 40 + 48 * 2) {
+        this.ctx.save();
+        this.ctx.fillStyle = '#000000';
+        this.ctx.globalAlpha = lerp(1, 0, Math.sin(BEAN/60));
+        this.ctx.fillRect(0, 0, 1920, 1080);
+        this.ctx.globalAlpha = 1;
+        this.ctx.restore();
+      }
 
       this.ctx.restore();
     }
