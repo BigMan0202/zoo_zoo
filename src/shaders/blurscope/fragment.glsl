@@ -49,6 +49,14 @@ vec2 square(vec2 uv) {
   return vec2(len, len2);
 }
 
+vec2 rotatingsquare(vec2 uv) {
+  uv = rotate(uv, rotation);
+  float len = abs(uv.x) + abs(uv.y);
+  vec2 uv2 = uv -= 0.5 * vec2(.1, -0.03);
+  float len2 = abs(uv2.x) + abs(uv2.y);
+  return vec2(len, len2);
+}
+
 vec2 diamond(vec2 uv) {
   float len = abs(uv.x) * 2. + abs(uv.y);
   vec2 uv2 = uv -= 0.5 * vec2(.1, -0.03);
@@ -100,7 +108,9 @@ void main() {
   uv *= 1.44 * 2.;
 
   vec2 len;
-  if(method > 4.5) {
+  if(method > 5.5) {
+    len = rotatingsquare(uv);
+  } else if(method > 4.5) {
     len = rectangle(uv);
   } else if(method > 3.5) {
     len = flower(uv);

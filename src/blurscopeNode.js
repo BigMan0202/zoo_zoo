@@ -53,13 +53,13 @@
         this.uniforms.method.value = 3;
       }
       if(BEAN >= 2880) {
-        this.uniforms.method.value = 0;
+        this.uniforms.method.value = 6;
       }
       if(BEAN >= 2976 + 24 - 4) {
-        this.uniforms.method.value = 0;
+        this.uniforms.method.value = 6;
       }
       if(BEAN >= 2976 + 24 + 12) {
-        this.uniforms.method.value = 0;
+        this.uniforms.method.value = 6;
       }
       if(BEAN >=3072) {
         this.uniforms.method.value = 3;
@@ -114,12 +114,12 @@
         this.uniforms.radius.value = 2.;
       }
 
-      if (BEAN >= 3060) {
-        this.uniforms.radius.value = easeIn(1.8, 1.5, F(frame, 3060, 12));
+      if (BEAN >= 3072) {
+        this.uniforms.radius.value = 1.5;//easeIn(2, 1.5, F(frame, 3072, 1));
       }
 
       if (BEAN >= 3156) {
-        this.uniforms.radius.value = easeIn(1.5, 1.65, F(frame, 3156, 12));
+        this.uniforms.radius.value = easeIn(1.5, 1.6, F(frame, 3240, 12));
       }
 
       if (BEAN >= 3252) {
@@ -162,13 +162,9 @@
         this.uniforms.x.value += 250;
         this.uniforms.y.value -= 100;
       }
-      if(BEAN >= 2640 + 24 - 4 && BEAN < 2640 + 48 - 4) {
+      if(BEAN >= 2640 + 24 - 4 && BEAN < 2640 + 48) {
         this.uniforms.x.value -= 40;
         this.uniforms.y.value += 70;
-      }
-      if(BEAN >= 2640 + 48 - 4 && BEAN < 2640 + 48) {
-        this.uniforms.x.value -= easeIn(300, 0, F(frame, 2640 + 48 - 4, 4));
-        this.uniforms.y.value += easeIn(400, 0, F(frame, 2640 + 48 - 4, 4));
       }
     }
   }
