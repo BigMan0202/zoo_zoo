@@ -34,12 +34,27 @@
           case 384:
             this.zoomThrob = 1;
             break;
+          case 1104:
+            this.zoomThrob = 15;
+            break;
+          case 1104 + 8:
+            this.zoomThrob = 1;
+            break;
+          case 2448:
+          case 2496:
+          case 2880:
+            this.zoomThrob = 40;
+            break;
+          case 2448 + 8:
+            this.zoomThrob = 1;
+            break;
           case 2640:
           case 2640 + 8:
           case 2640 + 24 - 4:
           case 2640 + 48:
             this.zoomThrob = 15;
         }
+
 
         /*
         if(BEAN >= 576) {
@@ -69,6 +84,9 @@
           }
         }
         */
+      }
+      if(BEAN >= 2448 && BEAN < 2448 + 8) {
+        this.zoomThrob = 40;
       }
       this.uniforms.frame.value = frame;
       this.uniforms.tDiffuse.value = this.inputs.texture.getValue();

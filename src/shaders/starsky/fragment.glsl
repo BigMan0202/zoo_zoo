@@ -18,7 +18,7 @@ void main() {
 
   vec2 coords = vUv - vec2(0.5, -0.5);
   coords *= vec2(16. / 9., 1.);
-  float angle = -frame / 5000.;
+  float angle = -frame / 2000.;
   coords = vec2(coords.x * cos(angle) - coords.y * sin(angle),
                 coords.x * sin(angle) + coords.y * cos(angle));
 
@@ -33,7 +33,7 @@ void main() {
   color = mix(
       mix(color, starColor, 1. - background.a),
       mix(color, yellow, 1. - background.a),
-      1. - smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
+      1. - pow(clamp((frame - 714.) / (737. - 714.), 0., 1.), 3.));
   } else {
       color = mix(color, yellow, 1. - background.a);
   }

@@ -21,7 +21,7 @@ void main() {
   vec3 color = background.rgb;
 
   vec2 coords = vUv - .5;
-  float angle = -frame / 5000.;
+  float angle = -frame / 2000.;
   coords = (coords + 4. * vec2(1666. - 960., -527. + 540.) / vec2(1920., 1080.));
   coords *= vec2(16. / 9., 1.);
   coords *= 0.25;
@@ -44,7 +44,7 @@ void main() {
       mix(
           color,
           mix(color, starColor, 1. - background.a),
-          smoothstep(0., 1., (frame - 691.) / (737. - 691.)));
+          pow(clamp((frame - 714.) / (737. - 714.), 0., 1.), 3.));
   } else {
       color = mix(color, yellow, 1. - background.a);
     }
