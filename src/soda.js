@@ -26,11 +26,13 @@
         289, 301, 321, 325, 333, 337, 345, 357, 361, 369, 373, 381,
       ];
 
-      if (BEAT && beans.includes((BEAN - 192) % 384)) {
+      if (BEAT && BEAN % 24 == 12) {
         this.throb = 1.18;
       } else {
         this.throb = Math.max(1, this.throb - .007);
       }
+
+
     }
 
     render() {
@@ -91,6 +93,7 @@
 
       const scale = this.throb;
 
+
       this.beatRegions = [
         {x: 735, y: 756, width: 98, height: 105, rotation: -.1},
         {x: 528, y: 475, width: 140, height: 107, rotation: .06},
@@ -101,7 +104,7 @@
       for (const beatRegion of this.beatRegions) {
         this.ctx.save();
         this.ctx.translate(beatRegion.x + beatRegion.width / 2, beatRegion.y + beatRegion.height / 2);
-        this.ctx.rotate(beatRegion.rotation);
+        this.ctx.rotate(beatRegion.rotation + 0.2 * Math.sin(0.5 * this.frame / 60 / 60 * PROJECT.music.bpm * Math.PI));
         this.ctx.drawImage(
           this.imageElement,
           beatRegion.x, beatRegion.y,
