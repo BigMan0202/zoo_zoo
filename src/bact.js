@@ -1,4 +1,5 @@
 (function(global) {
+    const F = (frame, from, delta) => (frame - FRAME_FOR_BEAN(from)) / (FRAME_FOR_BEAN(from + delta) - FRAME_FOR_BEAN(from));
   class bact extends ImageNode {
     constructor(id) {
       super(id, {
@@ -30,6 +31,11 @@
       this.schnappsgirls = document.createElement('img');
       Loader.load('res/schnappsgirls.png', this.schnappsgirls, () => null);
     }
+
+    update(frame) {
+      super.update(frame);
+      this.frame = frame;
+    }
     
     getImageName() {
       return 'res/bact.png';
@@ -37,7 +43,7 @@
 
     render() {
       super.render();
-      const startbean = 4272;
+      const startbean = 4416 + 24;
 
       const altairX = 149;
       const altairY = 295;
@@ -65,38 +71,34 @@
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width /  1920);
 
+      this.ctx.globalAlpha = Math.pow(easeOut(1, 0, F(this.frame, ((BEAN + 24)  / 48 | 0) * 48, 24)), 3);
+
       if (BEAN >= startbean && BEAN < startbean + 48) {
-        this.ctx.drawImage(this.altair, altairX, altairY);
+        this.ctx.drawImage(this.cocoon, cocoonX, cocoonY);
       }
       if (BEAN >= startbean + 48 && BEAN < startbean + 48 *2) {
         this.ctx.drawImage(this.pandacube, pandacubeX, pandacubeY);
       }
       if (BEAN >= startbean + 48 * 2 && BEAN < startbean + 48 * 3) {
-        this.ctx.drawImage(this.schnappsgirls, schnappsgirlsX, schnappsgirlsY);
+        this.ctx.drawImage(this.kvasigen, kvasigenX, kvasigenY);
       }
       if (BEAN >= startbean + 48 * 3 && BEAN < startbean + 48 * 4) {
-        this.ctx.drawImage(this.still, stillX, stillY);
+        this.ctx.drawImage(this.poobrain, poobrainX, poobrainY);
       }
       if (BEAN >= startbean + 48 * 4 && BEAN < startbean + 48 * 5) {
-        this.ctx.drawImage(this.poobrain, poobrainX, poobrainY);
+        this.ctx.drawImage(this.logicoma, logicomaX, logicomaY);
       }
       if (BEAN >= startbean + 48 * 5 && BEAN < startbean + 48 * 6) {
         this.ctx.drawImage(this.holon, holonX, holonY);
+        this.ctx.drawImage(this.altair, altairX, altairY);
       }
       if (BEAN >= startbean + 48 * 6 && BEAN < startbean + 48 * 7) {
         this.ctx.drawImage(this.ephidrena, ephidrenaX, ephidrenaY);
+        this.ctx.drawImage(this.schnappsgirls, schnappsgirlsX, schnappsgirlsY);
       }
       if (BEAN >= startbean + 48 * 7 && BEAN < startbean + 48 * 8) {
+        this.ctx.drawImage(this.still, stillX, stillY);
         this.ctx.drawImage(this.desire, desireX, desireY);
-      }
-      if (BEAN >= startbean + 48 * 8 && BEAN < startbean + 48 * 9) {
-        this.ctx.drawImage(this.cocoon, cocoonX, cocoonY);
-      }
-      if (BEAN >= startbean + 48 * 9 && BEAN < startbean + 48 * 10) {
-        this.ctx.drawImage(this.kvasigen, kvasigenX, kvasigenY);
-      }
-      if (BEAN >= startbean + 48 * 10 && BEAN < startbean + 48 * 11) {
-        this.ctx.drawImage(this.logicoma, logicomaX, logicomaY);
       }
 
       this.ctx.restore();
