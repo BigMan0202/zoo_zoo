@@ -12,14 +12,13 @@
 
                                by Ninjadev
 
-"Look Closer" is Ninjadev's entry for PC compo at TRSAC 2018.
-It is a single-file compiled web demo. To run it, simply open the .png.html file
-in your favorite modern, performant mp3-supporting browser (such as Chrome).
+"Look Closer" is Ninjadev's entry for the Newschool compo at TRSAC 2018.  It is
+a single-file compiled web demo. To run it, simply open the .png.html file in
+your favorite modern, performant mp3-supporting browser (such as Chrome).
 Remember --allow-file-access-from-files if running from disk!
 
-This demo is made using our open-source in-browser demo tool called nin. It's
-the first demo we create after migrating to a node-based system for our tool.
-Both the demo and the tool are open source, check it out at
-http://github.com/ninjadev. Thanks to everyone at TRSAC 2018 great party!
+This demo is made using our open-source in-browser demo tool called nin.  Both
+the demo and the tool are open source, check them out at
+http://github.com/ninjadev. Thanks to everyone at TRSAC 2018 for a great party!
 
-"Look Closer" was made by sigveseb, stiaje and lulle.
+"Look Closer" was made by sigveseb, stiaje, profit and lulle.
