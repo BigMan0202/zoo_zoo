@@ -22,7 +22,7 @@
       if(BEAT) {
         if((BEAN >= 576 && BEAN < 4800) ||
             BEAN >= 5136 && BEAN < 5856) {
-          if(BEAN % 48 == 24 && BEAN != 2856) {
+          if(BEAN % 48 == 24 && BEAN != 2856  && BEAN != 2616 && BEAN != 2664) {
               this.zoomThrob = 5;
           }
         }
@@ -48,9 +48,6 @@
           case 2448 + 8:
             this.zoomThrob = 1;
             break;
-          case 2640:
-          case 2640 + 8:
-          case 2640 + 24 - 4:
           case 2640 + 48:
             this.zoomThrob = 15;
         }
@@ -85,7 +82,7 @@
         }
         */
       }
-      if(BEAN >= 2448 && BEAN < 2448 + 8) {
+      if(BEAN >= 2448 && BEAN < 2448 + 10) {
         this.zoomThrob = 40;
       }
       this.uniforms.frame.value = frame;
