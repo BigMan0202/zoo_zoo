@@ -40,54 +40,80 @@
       this.ctx.save();
       this.ctx.scale(this.canvas.width / 1920, this.canvas.width / 1920);
 
-    	// star animation!
-    	// Start BEAN 1632 / frame 3138
-    	// end BEAN 2000 / frame 3779
-    	if (BEAN >= 1632){
-    		const frameInAnimation = (this.frame - this.startStarShootFrame) % 100
-        const move = lerp(0, 1, frameInAnimation / 70);
-        const seeThrough = easeIn(1, 0, frameInAnimation / 70);
-        this.ctx.fillStyle = "rgba(238,221,165," + seeThrough + ")";
+
+      // star animation!
+      // Start BEAN 1632 / frame 3138
+      // end BEAN 2000 / frame 3779
+      if (BEAN >= 1632){
+        this.ctx.fillStyle = '#000000';
+        this.ctx.fillRect(995, 208, 50, 50);
+        this.ctx.fillRect(986, 115, 53, 34);
+        this.ctx.fillRect(1079, 59, 37, 63);
+        this.ctx.fillRect(1136, 173, 52, 26);
+        this.ctx.fillRect(1093, 233, 38, 48);
+        this.ctx.lineCap = 'round';
+        this.ctx.lineWidth = 10;
+        const frameInAnimation = (this.frame - this.startStarShootFrame) % 100;
+        const move = easeOut(0, 50, frameInAnimation / 70);
+        const stretch = easeOut(0, 40, frameInAnimation / 30);
+        const seeThrough = easeOut(1, 0, frameInAnimation / 60);
+        this.ctx.fillStyle = `rgba(238,221,165,${seeThrough})`;
+        this.ctx.strokeStyle = `rgba(238,221,165,${seeThrough})`;
         this.ctx.save();
         this.ctx.translate(1078, 178);
         this.ctx.save();
         // left
         this.ctx.rotate(0.869);
-        this.ctx.fillRect(0,52+(100 * move),10, 100*move);
+        this.ctx.beginPath();
+        this.ctx.moveTo(5, 50 + move);
+        this.ctx.lineTo(5, 60 + move + stretch);
+        this.ctx.stroke();
         this.ctx.restore();
         this.ctx.save();
         // top left
         this.ctx.rotate(2.3);
-        this.ctx.fillRect(0,52+(100 * move),10, 100*move);
+        this.ctx.beginPath();
+        this.ctx.moveTo(5, 50 + move);
+        this.ctx.lineTo(5, 60 + move + stretch);
+        this.ctx.stroke();
         this.ctx.restore();
         this.ctx.save();
         // top right
         this.ctx.rotate(3.52);
-        this.ctx.fillRect(0,52+(100 * move),10, 100*move);
+        this.ctx.beginPath();
+        this.ctx.moveTo(5, 50 + move);
+        this.ctx.lineTo(5, 60 + move + stretch);
+        this.ctx.stroke();
         this.ctx.restore();
         this.ctx.save();
         // right
         this.ctx.rotate(4.8);
-        this.ctx.fillRect(0,52+(100 * move),10, 100*move);
+        this.ctx.beginPath();
+        this.ctx.moveTo(5, 50 + move);
+        this.ctx.lineTo(5, 60 + move + stretch);
+        this.ctx.stroke();
         this.ctx.restore();
         this.ctx.save();
         // bottom
         this.ctx.rotate(5.96);
-        this.ctx.fillRect(0,52+(100 * move),10, 100*move);
+        this.ctx.beginPath();
+        this.ctx.moveTo(5, 50 + move);
+        this.ctx.lineTo(5, 60 + move + stretch);
+        this.ctx.stroke();
         this.ctx.restore();
         this.ctx.restore();
 
-    	}
+      }
 
-    	// top left star corner 1048 x 161
+      // top left star corner 1048 x 161
 
-    	// top right 1083 x 141
+      // top right 1083 x 141
 
-    	// right 1113 x 183
+      // right 1113 x 183
 
-    	// bottom 1092 x 213
+      // bottom 1092 x 213
 
-    	// left 1052 x 201
+      // left 1052 x 201
 
       this.ctx.restore();
 
