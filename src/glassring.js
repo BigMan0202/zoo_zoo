@@ -81,7 +81,11 @@
         this.ctx.save();
         this.ctx.fillStyle = '#522e22';
         this.ctx.fillRect(beatRegion.x, beatRegion.y, beatRegion.width, beatRegion.height);
-        this.ctx.translate(beatRegion.x + beatRegion.width / 2, beatRegion.y + beatRegion.height / 2);
+        if (i == 0) {
+          this.ctx.translate(beatRegion.x + beatRegion.width / 2 + 15, beatRegion.y + beatRegion.height / 2 - 15);
+        } else {
+          this.ctx.translate(beatRegion.x + beatRegion.width / 2, beatRegion.y + beatRegion.height / 2);
+        }
         this.ctx.rotate(beatRegion.rotation - this.frame / 60 * (0.9 + i * 0.5) + i);
         this.ctx.drawImage(
           this.imageElement,
