@@ -30,12 +30,16 @@ void main() {
   uv.y += .75;
 
   vec3 brown = vec3(82., 46., 34.) / 255.;
+  vec3 yellow = vec3(238., 221., 165.) / 255.;
 
 
   vec4 bgColor = texture2D(background, vUv);
   vec3 color = bgColor.rgb;
   float amount = pow(clamp(0., 1., (frame - 1084.) / (1106. - 1084.)), 3.);
-  if(frame > 1106.5 && frame < 5000.) {
+  if(frame > 5000.) {
+    gl_FragColor = vec4(vec3(mix(yellow, color, bgColor.a)), 1.);
+    return;
+  } else if(frame > 1106.) {
     vec3 sunburstColor = vec3(1., 0., 0.);
     if(x < -0.001) {
         sunburstColor = mix(color, sunburst(uv), 1. - bgColor.a);

@@ -42,9 +42,17 @@
 
       if(BEAN >= 384) {
         this.ctx.fillStyle = '#eedda5';
-        this.ctx.fillRect(1170, 540 - 10, 5, 5);
-        this.ctx.fillRect(1085, 540 - 25, 5, 5);
-        this.ctx.fillRect(590, 540 + 40, 10, 10);
+        if(BEAN % 48 > 24) {
+          this.ctx.fillRect(1170, 540 - 10, 5, 5);
+        }
+        if(BEAN % (48 + 12) > 36) {
+          this.ctx.fillRect(1085, 540 - 25, 5, 5);
+        }
+        if(BEAN % (12) > 6) {
+          this.ctx.fillRect(590, 540 + 40, 10, 10);
+        } else {
+          this.ctx.fillRect(570, 540 + 40, 10, 10);
+        }
 
         if((BEAN % 48) < 24) {
           this.ctx.fillStyle = '#b80d13';
@@ -53,7 +61,16 @@
         this.ctx.fillStyle = '#eedda5';
 
 
-        this.ctx.fillRect(997, 540 - 65, 15, 5);
+        this.ctx.globalAlpha = 0.2;
+        for(let i = 0; i < 13; i++) {
+          if((BEAN + i) % (32) > 16) {
+            this.ctx.fillRect(997, 540 - 65 + 10 * i, 15, 3);
+          }
+        }
+        this.ctx.globalAlpha = 1;
+
+        this.ctx.fillRect(1110, 540, 10, 8);
+        this.ctx.fillRect(925, 520, 10, 8);
       }
 
       this.ctx.fillStyle = '#eedda5';

@@ -34,21 +34,34 @@
           F(frame, 1044, 12));
       }
 
-      if(BEAN >= 2976) {
+
+      if(BEAN >= 2496) {
+        this.uniforms.method.value = 1;
+      }
+      if(BEAN >= 2592) {
+        this.uniforms.method.value = 3;
+      }
+      if(BEAN >= 2640) {
+        this.uniforms.method.value = 0;
+      }
+      if(BEAN >= 2688) {
+        this.uniforms.method.value = 3;
+      }
+      if(BEAN >= 2880) {
         this.uniforms.method.value = 0;
       }
       if(BEAN >= 2976 + 24 - 4) {
-        this.uniforms.method.value = 1;
+        this.uniforms.method.value = 0;
       }
       if(BEAN >= 2976 + 24 + 12) {
-        this.uniforms.method.value = 2;
+        this.uniforms.method.value = 0;
       }
       if(BEAN >=3072) {
         this.uniforms.method.value = 3;
       }
 
       if(BEAN >= 3168 && BEAN < 3264) {
-        this.uniforms.method.value = 4;
+        this.uniforms.method.value = 3;
       }
 
       if(BEAN >= 3648) {
@@ -65,6 +78,35 @@
 
       if (BEAN >= 2292) {
         this.uniforms.radius.value = easeIn(1.2, 1.8, F(frame, 2292, 12));
+      }
+
+      if(BEAN >= 2448 && BEAN < 2448 + 10) {
+        this.uniforms.radius.value = 1.;
+      }
+
+      if(BEAN >= 2472 - 4 && BEAN < 2496) {
+        this.uniforms.radius.value = 2. - ((BEAN - 2472) / 3 | 0) / 4;
+      }
+
+      if(BEAN >= 2592 && BEAN < 2592 + 20) {
+        this.uniforms.radius.value = 1.;
+      }
+
+      /*
+      if(BEAN >= 2616 + 12 && BEAN < 2640) {
+        this.uniforms.radius.value = 2. - ((BEAN - 2616 - 12) / 2 | 0) * 0.3;
+      }
+      */
+
+      if(BEAN >= 2640 && BEAN < 2688) {
+        this.uniforms.radius.value = 1.;
+      }
+
+      if (BEAN >= 2880) {
+        this.uniforms.radius.value = 1.25;
+      }
+      if (BEAN >= 2976) {
+        this.uniforms.radius.value = 2.;
       }
 
       if (BEAN >= 3060) {
@@ -91,21 +133,33 @@
         this.uniforms.radius.value = smoothstep(1.2, 1.9, F(frame, 3840, 96));
       }
 
+      /*
       if(BEAN >= 2640 -4  && BEAN < 2640) {
         this.uniforms.x.value -= easeIn(0, 400, F(frame, 2640 - 2, 2));
         this.uniforms.y.value -= easeIn(0, 300, F(frame, 2640 - 2, 2));
       }
-      if(BEAN >= 2640 && BEAN < 2640 + 8) {
-        this.uniforms.x.value -= 400;
-        this.uniforms.y.value -= 300;
+      */
+
+      if(BEAN >= 2592 && BEAN < 2592 + 10) {
+        this.uniforms.x.value += 300;
+        this.uniforms.y.value -= 100;
       }
-      if(BEAN >= 2640 + 8 && BEAN < 2640 + 24 - 4) {
-        this.uniforms.x.value += 400;
-        this.uniforms.y.value -= 0;
+      if(BEAN >= 2592 + 10 && BEAN < 2592 + 24 - 4) {
+        this.uniforms.x.value -= 300;
+        this.uniforms.y.value -= 100;
+      }
+
+      if(BEAN >= 2640 && BEAN < 2640 + 10) {
+        this.uniforms.x.value -= 320;
+        this.uniforms.y.value -= 250;
+      }
+      if(BEAN >= 2640 + 10 && BEAN < 2640 + 24 - 4) {
+        this.uniforms.x.value += 250;
+        this.uniforms.y.value -= 100;
       }
       if(BEAN >= 2640 + 24 - 4 && BEAN < 2640 + 48 - 4) {
-        this.uniforms.x.value -= 300;
-        this.uniforms.y.value += 400;
+        this.uniforms.x.value -= 40;
+        this.uniforms.y.value += 70;
       }
       if(BEAN >= 2640 + 48 - 4 && BEAN < 2640 + 48) {
         this.uniforms.x.value -= easeIn(300, 0, F(frame, 2640 + 48 - 4, 4));
