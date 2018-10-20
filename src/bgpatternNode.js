@@ -27,7 +27,7 @@
       if(BEAT) {
         if((BEAN >= 576 && BEAN < 4800) ||
             BEAN >= 5136 && BEAN < 5856) {
-          if(BEAN % 48 == 24 && BEAN != 2856  && BEAN != 2616 && BEAN != 2664) {
+          if(BEAN % 48 == 24 && BEAN != 2856  && BEAN != 2616 && BEAN != 2664 && BEAN != 3000) {
               this.zoomThrob = 5;
           }
         }
