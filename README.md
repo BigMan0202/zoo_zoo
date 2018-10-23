@@ -2,7 +2,7 @@
 
 ---
 
-![](https://github.com/ninjadev/zoo/raw/master/lookcloser.png)
+![](https://github.com/ninjadev/zoo/raw/master/screenshot.png)
 
 "Look Closer" is Ninjadev's entry for TRSAC 2018.  It is a single-file compiled web demo. To run it, simply open the .png.html file in your favorite modern, performant mp3-supporting browser (such as Chrome). *Remember --allow-file-access-from-files if running from disk!*
 
